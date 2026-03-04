@@ -16,7 +16,10 @@ This constitution captures the technical standards, code quality expectations, t
 - **Learning Project**: Act as a learning ground applied to DDD and hexagonal patterns on the frontend.
 
 ### Languages and Frameworks
-- Preferred frontend stack to be defined via discussion.
+- **React 18** with **TypeScript 5.x**, scaffolded via **Vite**.
+- **Zustand** for state management / repository layer (driven adapters).
+- **Vanilla CSS** (responsive, mobile-first). No TailwindCSS unless explicitly requested.
+- **Vitest + React Testing Library** for automated testing.
 - Semantic HTML and ARIA roles for web accessibility.
 - Optimized CSS and JavaScript for fast load times.
 
@@ -31,6 +34,7 @@ This constitution captures the technical standards, code quality expectations, t
 
 ### Deployment and Constraints
 - Hosting on modern edge platforms like GitHub Pages, Vercel, or Netlify.
+- **No backend for now.** All data mocked via in-memory repositories. Architecture must use Repository ports so real API adapters can be swapped in later without touching Domain or Application layers.
 
 ## Code Quality
 
@@ -47,6 +51,18 @@ This constitution captures the technical standards, code quality expectations, t
 
 ### Code Review and Merges
 - Manual inspection to ensure design fidelity matching provided visual references (font sizing, weight, alignment).
+
+## Project Artifacts
+
+> These documents are the source of truth for implementation planning and must be consulted before any coding begins.
+
+| Artifact | Path | Description |
+|---|---|---|
+| **Implementation Plan** | [`PLAN.md`](file:///d:/work/shopping-cart/PLAN.md) | Technical context, architecture decisions, project structure, and resolved design decisions |
+| **Implementation Tickets** | [`TICKETS.md`](file:///d:/work/shopping-cart/TICKETS.md) | 15 implementation tickets across 5 waves with acceptance criteria and dependency ordering |
+| **Cart Domain Context** | [`.kittify/memory/domains/Cart.md`](file:///d:/work/shopping-cart/.kittify/memory/domains/Cart.md) | Cart bounded context: aggregate, invariants, ports, events |
+| **Inventory Domain Context** | [`.kittify/memory/domains/Inventory.md`](file:///d:/work/shopping-cart/.kittify/memory/domains/Inventory.md) | Inventory bounded context: ProductVariant aggregate, stock management |
+| **Pricing Domain Context** | [`.kittify/memory/domains/Pricing.md`](file:///d:/work/shopping-cart/.kittify/memory/domains/Pricing.md) | Pricing & Promotions bounded context: Coupon aggregate, discount calculation |
 
 ## Tribal Knowledge
 
