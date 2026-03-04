@@ -11,7 +11,7 @@
   - [x] T003: Implement arithmetic operations (`add`, `subtract`, `multiply`)
   - [x] T004: Implement comparison (`equals`)
   - [x] T005: Implement USD formatting (`format`)
-  - [ ] T006: Add comprehensive unit tests (Vitest)
+  - [x] T006: Add comprehensive unit tests (Vitest)
 - **Implementation Sketch**:
   1. Define the class and private state.
   2. Add factory methods for object creation.
