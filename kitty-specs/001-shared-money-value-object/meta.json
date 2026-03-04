@@ -1,0 +1,10 @@
+{
+    "feature_number": "001",
+    "slug": "001-shared-money-value-object",
+    "friendly_name": "Shared Money Value Object",
+    "mission": "software-dev",
+    "source_description": "T-001: Shared Money Value Object. Implement src/shared/domain/Money.ts — an immutable Value Object that wraps financial amounts as integers (cents) to avoid floating-point issues. Must support add, subtract, multiply, equals, and format (locale-aware currency string).",
+    "created_at": "2026-03-04T18:30:00Z",
+    "target_branch": "master",
+    "vcs": "git"
+}
