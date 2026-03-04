@@ -1,152 +1,179 @@
-<!-- Use Ctrl/Cmd + Shift + V in VS Code to preview this Markdown file. -->
+# Shopping Cart Interface Challenge
 
-# GreatFrontEnd Projects Challenge
+Welcome to the Shopping Cart Interface challenge! 
 
-Welcome to the GreatFrontEnd Projects platform! Join our [Discord server](https://www.greatfrontend.com/community) and get support from our community ranging from new developers to senior engineers from big tech companies!
+In this challenge, you will develop a fully functional and responsive shopping cart interface for a fictional e-commerce platform. You will be provided with designs adapted for mobile, tablet, and desktop interfaces, along with data corresponding to product listings and a sample order.
 
-This is a starter template for your challenge.
+## Project Brief
 
-## Getting started
+As per standard shopping carts, the interface should allow users to add items, modify quantity, remove items, and view an order summary including subtotal, shipping, and total cost. Users should also be able to add a coupon discount code to their order. You will have to dynamically update the user's shopping cart when the user modifies their cart anywhere on the e-commerce platform, and display the same cart contents on the Checkout page when the user clicks the "Checkout" button.
 
-### Overview
+### DDD Architecture & Domain Model
 
-At a high level, completing each challenge involves the following steps:
+**Technology Stack Note**: This project utilizes **Zustand** as the primary state management library for implementing the UI/Application layer state and repositories.
 
-1. Start the challenge from the challenge page.
-2. Understand the challenge's functional and visual requirements.
-3. Download starter code (optional), reference designs. For the best experience, obtain access to the Figma files.
-4. Set up your coding environment and GitHub repository.
-5. Develop using your preferred technology stack while referencing the designs, style guides, and any provided guides.
-6. Ask for help if necessary.
-7. Upon completion, review your work.
-8. Deploy your work on available hosting platforms.
-9. Submit your work and share it with the world!
+For the purpose of learning Domain-Driven Design (DDD), this project is divided into three distinct Bounded Contexts. The boundaries, terms, and rules are defined as follows:
 
-### Starter code
+1. **🛍️ Cart Context**
+   * **Responsibility**: Manages the user's active shopping cart, items, and calculating the raw subtotal.
+   * **Aggregate Root**: `Cart` (contains `CartItem` entities uniquely identified by `SkuId`).
+   * **Invariants**: Item quantity cannot be less than 1. Can contain multiple coupons.
 
-This starter template consists of the following files and directories:
+2. **📦 Inventory Context**
+   * **Responsibility**: Manages product variants and available stock levels.
+   * **Aggregate Root**: `ProductVariant`.
+   * **Invariants**: Cart item quantity cannot exceed available stock.
 
-```bash
-├── README.md
-├── css
-│   └── style.css
-├── designs
-├── img
-├── index.html
-└── js
-    └── index.js
+3. **🎟️ Pricing & Promotions Context**
+   * **Responsibility**: Manages coupon codes, validation rules, and calculating order discounts.
+   * **Aggregate Root**: `Coupon`.
+   * **Invariants**: Validates whether a discount code exists, returning specific domain errors.
+
+*Note: All financial amounts are represented using a `Money` Value Object to avoid floating-point precision issues.*
+
+#### Context Mapping & Domain Events
+
+The contexts remain decoupled by communicating primarily through standard interfaces (Ports) and Domain Events. For instance, the Cart Context queries the Inventory for stock availability, but relies on publishing events (like `CheckoutInitiated`) for the Inventory to asynchronously react and reserve stock.
+
+```mermaid
+flowchart LR
+    %% Context Boundaries
+    subgraph Cart_Context ["Cart Context"]
+        Cart["Cart<br/>(Aggregate Root)"]
+    end
+
+    subgraph Inventory_Context ["Inventory Context"]
+        Inventory["ProductVariant<br/>(Aggregate Root)"]
+    end
+
+    subgraph Pricing_Context ["Pricing & Promotions Context"]
+        Coupon["Coupon<br/>(Aggregate Root)"]
+    end
+
+    %% Synchronous / Direct Ports (Queries/Commands)
+    Cart -- "Queries Stock<br/>(Port/Adapter)" --> Inventory
+    Cart -- "Validates Code<br/>(Port/Adapter)" --> Coupon
+
+    %% Asynchronous / Domain Events
+    Cart -. "Event: CheckoutInitiated" .-> Inventory_Context
+    
+    %% Event Bus Representation
+    EventBus(("Event Bus<br/>(Domain Events)"))
+    Cart -. "ItemAddedToCart<br/>CartItemQuantityChanged<br/>CouponApplied<br/>CartCheckedOut" .-> EventBus
 ```
 
-- `README.md`: This file.
-- `designs`: Responsive design images for the challenge. Your submission will be compared against some or all of these images.
-- `index.html`: Entrypoint for your website. You should be editing this file.
-- `css`: For writing any custom CSS styles to customize the appearance of the page.
-- `js`: For writing any custom JavaScript to add interactivity to the page.
-- `img`: Image assets used by the challenge.
+#### Application Layer (Use Cases) & Ports
 
-### Provided assets
+The system communicates intent via distinct Application Services (Use Cases). These use cases represent the primary driving adapters.
 
-For each challenge, we provide the following assets:
+**Cart Context**
+* `AddItemToCartUseCase(cartId, skuId, quantity)`
+* `RemoveItemFromCartUseCase(cartId, skuId)`
+* `ChangeCartItemQuantityUseCase(cartId, skuId, newQuantity)`
+* `ApplyCouponToCartUseCase(cartId, couponCode)`
+* `RemoveCouponFromCartUseCase(cartId, couponCode)`
+* `InitiateCheckoutUseCase(cartId)`
+* **Ports**: `IInventoryService`, `IPricingService` (Driven Adapters connecting out to the other contexts)
 
-- **Starter/skeleton code**: `index.html`, `style.css`, and `index.js`.
-- **Designs**: The `designs` directory contains reference image design files for the various device breakpoints and states for the challenge. With only these images, it can be hard to determine the exact styling required, so `style-guide.md` contains valuable information about the design, such as device breakpoints, typography styles, and color palette.
-- **Images**: If the challenge uses some images such as illustrations, logos, etc, they will be provided in the `img` directory.
-- **Icons**: Icons can be found on [Remix Icon](https://remixicon.com/).
+**Inventory Context**
+* `CheckStockAvailabilityUseCase(skuId, requestedQuantity)` (Synchronous Query)
+* `ReserveStockUseCase(orderId, items[])` (Event-Driven)
+* `ReleaseStockReservationUseCase(orderId)` (Event/Timer-Driven)
+* `ConfirmStockDepletionUseCase(orderId)` (Event-Driven)
 
-For the best (and realistic) experience, we recommend developing while referencing the challenge's Figma file. If the challenge is free or you have a [GreatFrontEnd Projects Premium](https://greatfrontend.com/projects/pricing) subscription, you'd be able to download the challenge's `.fig` Figma file, which will allow you to emulate developers at work – inspecting high fidelity designs and diving into each element's properties like colors, font sizes, spacing, etc.
+**Pricing & Promotions Context**
+* `ValidateCouponUseCase(couponCode)`
+* `CalculateDiscountUseCase(couponCode, rawSubtotal)`
 
-### Using Figma files
+#### Proposed Folder Structure (Hexagonal)
 
-The downloaded `.fig` file can be opened using the [Figma website](https://www.figma.com/) or [desktop app](https://www.figma.com/downloads/). By inspecting the Figma file, you will be able to build as closely as possible to the design.
+Following the principles of Hexagonal Architecture, the source code will map driving and driven adapters around a pure domain core:
 
-If you are new to Figma, here are some useful resources to help you get acquainted with Figma:
+```text
+src/
+  features/
+    cart/                 <-- 🛍️ Cart Context
+      ui/                 <-- [Driving Adapters] React components (CartPage, CartRow)
+      application/        <-- [Application] Use Cases & Ports
+        use-cases/        (AddItemToCart, ChangeItemQuantity, etc.)
+        ports/            (IInventoryService, IPricingService, ICartRepository)
+      domain/             <-- [Domain] Pure business rules
+        Cart.ts           (Aggregate Root)
+        CartItem.ts       (Entity)
+        CartEvents.ts
+      infrastructure/     <-- [Driven Adapters] Concrete implementations
+        adapters/         (InventoryContextAdapter, PricingContextAdapter)
+        repositories/     (ZustandCartRepository)
 
-- [Intro to Figma for Developers by Scrimba](https://www.youtube.com/watch?v=fZ-OU_7aBv4)
-- [Figma Onboarding Kit for Developers](https://www.figma.com/community/file/1202517341060356377)
-- [Figma 101 for Developers](https://www.figma.com/community/file/1199577674592933191)
+    inventory/            <-- 📦 Inventory Context
+      ui/                 <-- [Driving Adapters] Admin components (optional)
+      application/        <-- [Application] Use Cases & Ports
+        use-cases/        (CheckStockAvailability, ReserveStock, etc.)
+        ports/            (IStockRepository)
+      domain/             <-- [Domain] Pure business rules
+        ProductVariant.ts (Aggregate Root)
+      infrastructure/     <-- [Driven Adapters] Concrete implementations
+        repositories/     (MockInventoryRepository)
 
-As a developer, you do not have to learn how to create designs with Figma; you primarily have to know how to navigate a file, selecting frames, inspect properties of the elements such as their size, color, spacing, typography, etc.
+    pricing/              <-- 🎟️ Pricing & Promotions Context
+      ui/                 <-- [Driving Adapters] Admin components (optional)
+      application/        <-- [Application] Use Cases & Ports
+        use-cases/        (ValidateCoupon, CalculateDiscount)
+        ports/            (ICouponRepository)
+      domain/             <-- [Domain] Pure business rules
+        Coupon.ts         (Aggregate Root)
+      infrastructure/     <-- [Driven Adapters] Concrete implementations
+        repositories/     (MockCouponRepository)
+```
 
-## Working on the challenge
+### Implementation Requirements
 
-### Using GitHub for storing code with version control
+#### General Layout
+- **Structure**: The page is divided into two main columns:
+  - **Left section**: Cart items
+  - **Right section**: Order summary
+- **Empty state**: If there are no items in the cart, an empty state should be displayed.
 
-We will be using [GitHub](https://www.github.com/) to store your challenge code as it is the best place for developers to build up their coding portfolio. Many other developer-related services integrate with GitHub as well. If it's your first time using Git/GitHub, refer to [GitHub's beginner documentation](https://docs.github.com/en/get-started/getting-started-with-git).
+#### Cart Items (Left Column)
+- **Default sort**: Latest item added to cart first.
+- **Item denomination**: Each product variant added to the cart should be displayed separately (e.g., Orange and Pink variants of the same item appear as separate rows).
+- **Item name and image**: Should be clickable and link to the product detail page. Image displayed must correspond to the variant added.
+- **Pricing**: If a discount is available, display the list price with a strikethrough next to the sale price. Otherwise, display only the list price.
+- **Quantity selector**: "-" and "+" buttons to control quantity.
+  - Can only be decreased to 1, after which the user must click "Remove".
+  - Can only be increased up to maximum available stock. Disable "+" and show 'Insufficient stock' tooltip when reached.
+- **"Remove" link**: A clickable text link. Triggers a confirmation prompt to prevent accidental removals.
 
-There are two common ways to go about developing the challenges:
+#### Order Summary Section
+- **Real-time calculation**: Subtotal, shipping (always FREE), and total evaluate automatically and in real-time as quantities or coupons modify.
+- **Coupon Code Feature**:
+  - Implement "Add coupon code" button states (normal, hover, focus, disabled).
+  - Clicking the button turns it into an input field with an "Apply" button.
+  - Implement input states (normal, filled, focus, disabled, error, error filled, error focused).
+  - Perform validation on "Apply":
+    - Empty input -> "Please enter a valid code" error.
+    - Invalid code -> "Sorry, but this coupon doesn't exist" error.
+    - Valid code -> Success state showing the coupon code as a tag under the field, and the discount amount added under the subtotal.
+  - Clicking "x" on applied coupon removes it from the order summary.
 
-1. **Code first, GitHub repo later**: Jump right into developing your code. After you're done, set up a GitHub repository and push your code to the repo. If it's your first time doing a challenge and it is a small one, this approach might be more convenient.
-2. **GitHub repo first, code later**: For more complex and longer-term projects, it will be more advisable to set up a GitHub repository first and commit to the repository often so as to have better version control. **This is the recommended approach.**
+#### Stock Validation and Updates
+- **Real-time validation**: Validate stock asynchronously when adding a product or modifying quantity. Show an 'Insufficient stock' modal if stock changes, then update cart after the user clicks 'Ok'.
+- **Checkout validation**: Validate all cart items' stock availability when clicking "Checkout". Show modal if stock changes, then update cart.
+- **[Stretch Goal] Stock reservation**: Reserve stock for a limited time after clicking "Checkout" to prevent concurrency issues where multiple customers attempt to buy the last units.
 
-### Developing the challenge
+#### General Requirements
+- **Design fidelity**: Match provided designs closely (text color, font size, weight, spacing, dimensions, etc.).
+- **Responsive behavior**: Stack vertically on mobile/smaller screens, align horizontally on wider screens.
+- **Cross-browser compatibility**: Must work on major browsers including Chrome, Firefox, and Safari.
+- **[Stretch Goal] Performance optimization**: Code for fast load times with efficient CSS and JavaScript techniques.
+- **[Stretch Goal] Accessibility and semantics**: Follow best practices for web accessibility (semantic HTML, ARIA roles, proper alt tags for images).
 
-Out-of-the-box, our starter templates help you get started with the challenges using vanilla HTML, CSS, and JavaScript. The easiest way to start developing is to open the `index.html` file using an IDE (Integrated Development Editor) like [VS Code](https://code.visualstudio.com/) and start changing the code. To preview the result, open `index.html` using a web browser. Remember to refresh the browser to see any updates!
+## Getting Started
 
-That said, you are free to choose a technology stack as you deem fit – React, Next.js, Vite, Vue, you name it. Where relevant and possible, you can integrate these libraries into the starter template.
+1. Set up your coding environment and GitHub repository.
+2. Review the provided `designs` directory to understand the visual requirements for different breakpoints.
+3. Develop the solution using your preferred technology stack, applying the functional and visual requirements.
+4. Test functionality, responsiveness, cross-browser compatibility, and accuracy.
+5. Deploy your work to a hosting platform (e.g., GitHub Pages, Vercel, Netlify).
 
-You can even use the recommended starter code provided by your chosen tech stack but you will be in-charge of adding necessary code for CSS resets, copying any provided image assets over and importing the challenge font. There aren't a lot of them, so you can poke around the starter code files and easily identify what to copy into your custom setup.
-
-Here's a basic outline of the process of converting a design image into front end code:
-
-1. **Study the design**: Examine the design images / Figma files with the aim of understanding the layout, components, typography, colors, interactions and any responsive design requirements for different screen sizes. Be sure to also cross check with the provided style guide.
-2. **HTML structure**: Plan the HTML structure of the challenge based on the design. Use semantic HTML elements such as `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, and `<footer>`.
-3. **CSS styling**: Apply CSS styling to the HTML elements to match the visual design. Use CSS classes to set font styles, sizes, colors, margins, paddings, borders, and backgrounds while referring to the design, style guide, and Figma file.
-4. **Responsive design**: Implement responsive design techniques to ensure the website looks and functions well on different devices and screen sizes. Use media queries to adjust layout, font sizes, and other styling properties as needed for various breakpoints.
-5. **Interactivity and JavaScript**: Implement any interactive features or animations using JavaScript or front end frameworks like React or Vue.js.
-
-### Getting help
-
-It is common to get stuck while working on a challenge especially when it touches on unfamiliar topics or techniques. To get help, you can leverage the following:
-
-1. **Read the provided guides**: Our guides contain common problems people faced for the challenge and we offer resources and solutions to unblock yourself.
-2. **Leverage the challenge forum**: Use the "Discussions" tab for the challenge to either look at questions asked by others or ask your own question.
-3. **GreatFrontEnd community**: Join the [Discord community](https://www.greatfrontend.com/community) and get real-time support from the community.
-4. **[ChatGPT](https://chat.openai.com/)**: ChatGPT is great for answering common and introductory level questions. You can even send your code to ChatGPT for it to comment on.
-
-## Completing
-
-Well done completing the development! We're sure it looks fantastic, but before you put it up for the world to see, there are a few more things that should be done.
-
-### Review
-
-A good developer reviews their work during development, and definitely before deploying. Perform the following basic checks:
-
-1. **Code formatting**: Code formatting usually does not affect the end result of the website, but it helps make your code maintainable. Tools like [Prettier](https://prettier.io/) come in handy here. If you are using [VS Code](https://code.visualstudio.com/), do "Right click" -> "Format document" to format the file using the default formatters.
-2. **Test for responsiveness**: Check your website's responsiveness on different devices and screen sizes, including desktops, laptops, tablets, and smartphones. Verify that the layout adjusts smoothly and all content remains accessible and readable.
-3. **Check for content accuracy**: Review all text content, images, and multimedia elements to ensure accuracy, relevance, and proper formatting. Verify that there are no spelling or grammatical errors.
-
-These checks are non-exhaustive! The list goes on and the more complex your product is, the more things you should check for.
-
-### Deploy your site
-
-Deployment is the process of putting your website's code onto publicly-accessible web servers so that anyone in the world can visit your website.
-
-We recommend the following hosting providers where you can deploy your website for free:
-
-- [GitHub Pages](https://pages.github.com/): If you are using the default starter code template hosted on a public GitHub repository, this is the easiest and fastest way to get your site deployed.
-- [Vercel](https://www.vercel.com/): Vercel offers a one-click deployment experience just by connecting your GitHub repository and they have a generous free tier. Could be overkill for hosting static files that don't require a build step.
-- [Netlify](https://www.netlify.com/): Similar offerings as Vercel.
-
-### Submission
-
-Before submitting, ensure the following:
-
-1. **Your GitHub repository is public**. This allows the community to view your code and comment on it on your submission page.
-2. **Your completed challenge is hosted on a publicly-accessible URL**. This is important because we take screenshots of your website using various device breakpoints / screen widths and allow you to compare the differences between your implementation and the designs.
-
-Then head to the challenge page where you will find a "Submit" button. Clicking on the button leads you to a submit page where you can fill in additional details about your process. After the submission form is filled, you will be brought to your submission page and get points for completing the challenge!
-
-## Next steps
-
-Congratulations on submitting your completed challenge! 🚀 Here are some possible next steps you can take:
-
-1. **Start on a [new challenge](https://www.greatfrontend.com/projects/challenges)**: Most challenges use the same design system, and you will find that you can reuse some of the styles and components you have built in past challenges.
-2. **Show off your solution to the community**: Post a link to your completed challenge in the [Discord community](https://www.greatfrontend.com/community).
-3. **Share your solution on your social media accounts**: Share your achievements to your network by adding screenshots of your completed challenge and links to the live websites. Do mention us (@GreatFrontEnd on LinkedIn, Instagram, and Twitter/X), we'd love to see what you have built!
-4. **Write about your development process**: Platforms like [DEV Community](https://dev.to), [Hashnode](https://hashnode.com/), [Medium](https://medium.com/), and [HackerNoon](https://hackernoon.com/) are great for writing technical content to build your online presence and reinforce your understanding.
-
-## Have questions or feedback?
-
-At GreatFrontEnd projects, we greatly value receiving feedback as it helps us continuously improve and refine our products/services to better meet the needs and expectations of our customers and stakeholders. If you have any feedback or questions, the best channels to reach out would be our [Discord community](https://www.greatfrontend.com/community), our [LinkedIn Page](https://www.linkedin.com/company/greatfrontend), or send an email to contact@greatfrontend.com.
-
-🔥 Good luck on your Front End Developer journey! 🔥
+Good luck, and have fun building the Shopping Cart Interface!
