@@ -1,9 +1,13 @@
 ---
-work_package_id: "WP01"
-title: "Implement Shared Money Value Object"
-lane: "planned"
+work_package_id: WP01
+title: Implement Shared Money Value Object
+lane: "doing"
 dependencies: []
-subtasks: ["T001", "T002", "T003", "T004", "T005", "T006"]
+base_branch: master
+base_commit: 4bae38ac5d32453e23e58764cbc679543f856e49
+created_at: '2026-03-04T15:35:27.473393+00:00'
+subtasks: [T001, T002, T003, T004, T005, T006]
+shell_pid: "14420"
 ---
 
 # WP01: Implement Shared Money Value Object
