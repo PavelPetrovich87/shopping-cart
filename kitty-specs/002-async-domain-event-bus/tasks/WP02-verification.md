@@ -1,9 +1,13 @@
 ---
 work_package_id: WP02
 title: Event Bus Verification
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: 002-async-domain-event-bus-WP01
+base_commit: 2ae62faebd54439c2b8a76ea512c7f57ed3192e2
+created_at: '2026-03-05T10:43:29.149857+00:00'
 subtasks: [T007]
+shell_pid: "2524"
 ---
 
 # WP02: Event Bus Verification
