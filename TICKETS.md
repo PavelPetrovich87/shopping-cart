@@ -6,7 +6,7 @@
 
 ## Wave 0 — Foundation
 
-### T-001: Shared `Money` Value Object
+### T-001: Shared `Money` Value Object ✅
 | Field | Value |
 |---|---|
 | **Context** | `shared` |
