@@ -8,6 +8,7 @@ base_commit: b1fbc2b6aa02a2fa04c18872ce471038373eb547
 created_at: '2026-03-05T10:41:03.291052+00:00'
 subtasks: [T001, T002, T003, T004, T005, T006]
 shell_pid: "804"
+agent: "Antigravity"
 ---
 
 # WP01: Event Bus Core Implementation
@@ -82,3 +83,7 @@ This is a foundational infrastructure component located in `src/shared/events/`.
 
 ## Next Steps
 Run `spec-kitty implement WP01` to start.
+
+## Activity Log
+
+- 2026-03-05T10:41:03Z – Antigravity – shell_pid=804 – lane=doing – Assigned agent via workflow command
