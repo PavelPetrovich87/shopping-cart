@@ -1,13 +1,13 @@
 ---
 work_package_id: WP02
 title: Event Bus Verification
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: 002-async-domain-event-bus-WP01
 base_commit: 2ae62faebd54439c2b8a76ea512c7f57ed3192e2
 created_at: '2026-03-05T10:43:29.149857+00:00'
 subtasks: [T007]
-shell_pid: "2524"
+shell_pid: "8044"
 agent: "Antigravity"
 ---
 
@@ -54,3 +54,4 @@ Run `spec-kitty implement WP02 --base WP01` to start.
 
 - 2026-03-05T10:43:29Z – Antigravity – shell_pid=2524 – lane=doing – Assigned agent via workflow command
 - 2026-03-05T10:46:33Z – Antigravity – shell_pid=2524 – lane=for_review – Ready for review: Event Bus verification suite is complete. Rebased against WP01.
+- 2026-03-05T11:01:23Z – Antigravity – shell_pid=8044 – lane=doing – Started review via workflow command
