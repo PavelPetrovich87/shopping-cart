@@ -36,7 +36,7 @@
 **Depends On**: WP01
 **Estimated Size**: ~300 lines
 
-- [ ] **T007**: Implement comprehensive Vitest suite covering happy and edge cases.
+- [x] T007: Implement comprehensive Vitest suite covering happy and edge cases.
 
 **Implementation Sketch**:
 1. Test single and multiple subscribers.
