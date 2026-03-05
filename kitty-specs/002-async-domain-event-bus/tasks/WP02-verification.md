@@ -8,6 +8,7 @@ base_commit: 2ae62faebd54439c2b8a76ea512c7f57ed3192e2
 created_at: '2026-03-05T10:43:29.149857+00:00'
 subtasks: [T007]
 shell_pid: "2524"
+agent: "Antigravity"
 ---
 
 # WP02: Event Bus Verification
@@ -48,3 +49,7 @@ Uses `src/shared/events/EventBus.ts`. Relies on Vitest for unit testing.
 
 ## Next Steps
 Run `spec-kitty implement WP02 --base WP01` to start.
+
+## Activity Log
+
+- 2026-03-05T10:43:29Z – Antigravity – shell_pid=2524 – lane=doing – Assigned agent via workflow command
