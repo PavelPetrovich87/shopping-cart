@@ -25,5 +25,3 @@ dist-ssr
 
 # Project specifics
 .kittify/workspaces/
-# Excluded via sparse-checkout
-kitty-specs/
