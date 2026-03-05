@@ -12,12 +12,12 @@
 **Depends On**: —
 **Estimated Size**: ~450 lines
 
-- [ ] **T001**: Define `DomainEvent` and `EventHandler` types. `[P]`
-- [ ] **T002**: Define `IEventBus` interface. `[P]`
-- [ ] **T003**: Implement `EventBus` class (registry and state management).
-- [ ] **T004**: Implement `subscribe` and `unsubscribe` logic.
-- [ ] **T005**: Implement async `publish` with error isolation (`Promise.allSettled`).
-- [ ] **T006**: Export `eventBus` singleton instance.
+- [x] T001: Define `DomainEvent` and `EventHandler` types. `[P]`
+- [x] T002: Define `IEventBus` interface. `[P]`
+- [x] T003: Implement `EventBus` class (registry and state management).
+- [x] T004: Implement `subscribe` and `unsubscribe` logic.
+- [x] T005: Implement async `publish` with error isolation (`Promise.allSettled`).
+- [x] T006: Export `eventBus` singleton instance.
 
 **Implementation Sketch**:
 1. Create `DomainEvent.ts` with basic event shape (`eventName`, `timestamp`, `payload`).
