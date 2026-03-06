@@ -1,10 +1,11 @@
 # Implementation Tickets — Shopping Cart Interface
 
-> Tickets are ordered by **wave** (dependency order). A ticket can only start after all its `Depends On` items are complete.
+> Tickets are ordered by **tier** (dependency order). A ticket can only start after all its `Depends On` items are complete. All tickets within the same tier can be executed **in parallel**.
 
 ---
 
-## Wave 0 — Foundation
+## Tier 1 — Base Foundation
+*Independent tasks that form the base of the application.*
 
 ### T-001: Shared `Money` Value Object ✅
 | Field | Value |
@@ -16,15 +17,15 @@
 **Description**: Implement `src/shared/domain/Money.ts` — an immutable Value Object that wraps financial amounts as integers (cents) to avoid floating-point issues. Must support `add`, `subtract`, `multiply`, `equals`, and `format` (locale-aware currency string).
 
 **Acceptance Criteria**:
-- [ ] All arithmetic uses integer cents internally
-- [ ] `Money.fromPrice(25)` → stores `2500` cents
-- [ ] `money.format()` → `"$25.00"`
-- [ ] Immutable — all operations return new `Money` instances
-- [ ] Unit tests cover arithmetic, formatting, and edge cases (zero, negative guard)
+- [x] All arithmetic uses integer cents internally
+- [x] `Money.fromPrice(25)` → stores `2500` cents
+- [x] `money.format()` → `"$25.00"`
+- [x] Immutable — all operations return new `Money` instances
+- [x] Unit tests cover arithmetic, formatting, and edge cases (zero, negative guard)
 
 ---
 
-### T-002: Async Domain Event Bus
+### T-002: Async Domain Event Bus ✅
 | Field | Value |
 |---|---|
 | **Context** | `shared` |
@@ -34,11 +35,11 @@
 **Description**: Implement `src/shared/events/EventBus.ts` — a typed, async Pub/Sub event bus. Handlers subscribe by event type and are invoked asynchronously when events are published. Must support multiple handlers per event and provide an `unsubscribe` mechanism.
 
 **Acceptance Criteria**:
-- [ ] `eventBus.subscribe<ItemAddedToCart>(handler)` registers a typed handler
-- [ ] `eventBus.publish(event)` invokes all matching handlers asynchronously
-- [ ] Multiple handlers per event type supported
-- [ ] `unsubscribe` returns a teardown function
-- [ ] Unit tests cover: subscribe, multi-handler dispatch, unsubscribe, async execution order
+- [x] `eventBus.subscribe<ItemAddedToCart>(handler)` registers a typed handler
+- [x] `eventBus.publish(event)` invokes all matching handlers asynchronously
+- [x] Multiple handlers per event type supported
+- [x] `unsubscribe` returns a teardown function
+- [x] Unit tests cover: subscribe, multi-handler dispatch, unsubscribe, async execution order
 
 ---
 
@@ -58,7 +59,8 @@
 
 ---
 
-## Wave 1 — Domain Models & Ports
+## Tier 2 — Domain Entities
+*Core business logic depending only on Tier 1.*
 
 ### T-004: Cart Aggregate Root & `CartItem` Entity
 | Field | Value |
@@ -77,42 +79,6 @@
 - [ ] State transitions: `initiateCheckout()` → `Checkout_Pending`, `markCheckedOut()` → `Checked_Out`
 - [ ] Domain events emitted: `ItemAddedToCart`, `CartItemQuantityChanged`, `ItemRemovedFromCart`, `CartCleared`
 - [ ] Unit tests for all invariants and state transitions
-
----
-
-### T-005: Cart Ports (Interfaces)
-| Field | Value |
-|---|---|
-| **Context** | 🛍️ Cart |
-| **Complexity** | 🟢 Small |
-| **Depends On** | T-004 |
-
-**Description**: Define port interfaces in `src/features/cart/application/ports/`: `ICartRepository`, `IInventoryService`, `IPricingService`. These are the contracts that driven adapters must fulfill.
-
-**Acceptance Criteria**:
-- [ ] `ICartRepository`: `getCart()`, `saveCart(cart)` method signatures
-- [ ] `IInventoryService`: `checkStockAvailability(skuId, quantity): Promise<StockResult>`
-- [ ] `IPricingService`: `validateCoupon(code): Promise<CouponResult>`, `calculateDiscount(code, subtotal): Promise<Money>`
-- [ ] All return types are domain types (no infrastructure leaks)
-
----
-
-### T-006: Cart Use Cases
-| Field | Value |
-|---|---|
-| **Context** | 🛍️ Cart |
-| **Complexity** | 🔴 Large |
-| **Depends On** | T-004, T-005, T-002 |
-
-**Description**: Implement all Cart use cases in `src/features/cart/application/use-cases/`: `AddItemToCart`, `RemoveItemFromCart`, `ChangeCartItemQuantity`, `ApplyCouponToCart`, `RemoveCouponFromCart`, `InitiateCheckout`. Each use case orchestrates domain logic, validates via driven ports, and publishes domain events.
-
-**Acceptance Criteria**:
-- [ ] `AddItemToCart` checks stock via `IInventoryService` before adding
-- [ ] `ChangeCartItemQuantity` checks stock before updating
-- [ ] `ApplyCouponToCart` validates via `IPricingService`
-- [ ] `InitiateCheckout` validates all items' stock, transitions state, emits `CheckoutInitiated`
-- [ ] All use cases publish appropriate domain events via EventBus
-- [ ] Unit tests with mocked ports for each use case (happy + error paths)
 
 ---
 
@@ -135,23 +101,6 @@
 
 ---
 
-### T-008: Inventory Ports & Use Cases
-| Field | Value |
-|---|---|
-| **Context** | 📦 Inventory |
-| **Complexity** | 🟡 Medium |
-| **Depends On** | T-007 |
-
-**Description**: Define `IStockRepository` port and implement use cases: `CheckStockAvailability`, `ReserveStock`, `ReleaseStockReservation`, `ConfirmStockDepletion`.
-
-**Acceptance Criteria**:
-- [ ] `CheckStockAvailability(skuId, qty)` returns `{ available: boolean, currentStock: number }`
-- [ ] `ReserveStock` creates reservations and emits `StockReserved`
-- [ ] `ReleaseStockReservation` cleans up expired holds
-- [ ] Unit tests with mocked repository
-
----
-
 ### T-009: `Coupon` Aggregate Root
 | Field | Value |
 |---|---|
@@ -171,6 +120,43 @@
 
 ---
 
+## Tier 3 — Ports & Basic Use Cases
+*Interfaces and early orchestration depending on entities from Tier 2.*
+
+### T-005: Cart Ports (Interfaces)
+| Field | Value |
+|---|---|
+| **Context** | 🛍️ Cart |
+| **Complexity** | 🟢 Small |
+| **Depends On** | T-004 |
+
+**Description**: Define port interfaces in `src/features/cart/application/ports/`: `ICartRepository`, `IInventoryService`, `IPricingService`. These are the contracts that driven adapters must fulfill.
+
+**Acceptance Criteria**:
+- [ ] `ICartRepository`: `getCart()`, `saveCart(cart)` method signatures
+- [ ] `IInventoryService`: `checkStockAvailability(skuId, quantity): Promise<StockResult>`
+- [ ] `IPricingService`: `validateCoupon(code): Promise<CouponResult>`, `calculateDiscount(code, subtotal): Promise<Money>`
+- [ ] All return types are domain types (no infrastructure leaks)
+
+---
+
+### T-008: Inventory Ports & Use Cases
+| Field | Value |
+|---|---|
+| **Context** | 📦 Inventory |
+| **Complexity** | 🟡 Medium |
+| **Depends On** | T-007 |
+
+**Description**: Define `IStockRepository` port and implement use cases: `CheckStockAvailability`, `ReserveStock`, `ReleaseStockReservation`, `ConfirmStockDepletion`.
+
+**Acceptance Criteria**:
+- [ ] `CheckStockAvailability(skuId, qty)` returns `{ available: boolean, currentStock: number }`
+- [ ] `ReserveStock` creates reservations and emits `StockReserved`
+- [ ] `ReleaseStockReservation` cleans up expired holds
+- [ ] Unit tests with mocked repository
+
+---
+
 ### T-010: Pricing Ports & Use Cases
 | Field | Value |
 |---|---|
@@ -187,7 +173,27 @@
 
 ---
 
-## Wave 2 — Infrastructure (Driven Adapters)
+## Tier 4 — Core Logic & Adapters
+*Cart use cases and data storage relying on lower tiers.*
+
+### T-006: Cart Use Cases
+| Field | Value |
+|---|---|
+| **Context** | 🛍️ Cart |
+| **Complexity** | 🔴 Large |
+| **Depends On** | T-004, T-005, T-002 |
+
+**Description**: Implement all Cart use cases in `src/features/cart/application/use-cases/`: `AddItemToCart`, `RemoveItemFromCart`, `ChangeCartItemQuantity`, `ApplyCouponToCart`, `RemoveCouponFromCart`, `InitiateCheckout`. Each use case orchestrates domain logic, validates via driven ports, and publishes domain events.
+
+**Acceptance Criteria**:
+- [ ] `AddItemToCart` checks stock via `IInventoryService` before adding
+- [ ] `ChangeCartItemQuantity` checks stock before updating
+- [ ] `ApplyCouponToCart` validates via `IPricingService`
+- [ ] `InitiateCheckout` validates all items' stock, transitions state, emits `CheckoutInitiated`
+- [ ] All use cases publish appropriate domain events via EventBus
+- [ ] Unit tests with mocked ports for each use case (happy + error paths)
+
+---
 
 ### T-011: Zustand Cart Repository + Context Adapters
 | Field | Value |
@@ -223,7 +229,8 @@
 
 ---
 
-## Wave 3 — UI Components
+## Tier 5 — UI Components
+*Presentation layer depending on core logic.*
 
 ### T-013: Cart Page & Cart Row Components
 | Field | Value |
@@ -267,7 +274,8 @@
 
 ---
 
-## Wave 4 — Integration & Checkout
+## Tier 6 — Apex Checkout Integration
+*The peak of the implementation depending on everything below it.*
 
 ### T-015: Checkout Flow & Stock Reservation
 | Field | Value |
@@ -291,43 +299,65 @@
 
 ## Summary Matrix
 
-| Wave | Tickets | Effort |
+| Tier | Tickets | Effort |
 |---|---|---|
-| **0 — Foundation** | T-001, T-002, T-003 | 🟢🟢🟡 |
-| **1 — Domain & Ports** | T-004 → T-010 | 🟡🟢🔴🟡🟡🟡🟢 |
-| **2 — Infrastructure** | T-011, T-012 | 🟡🟢 |
-| **3 — UI** | T-013, T-014 | 🔴🔴 |
-| **4 — Integration** | T-015 | 🔴 |
+| **Tier 1 — Base Foundation** | T-001, T-002, T-003 | 🟢🟢🟡 |
+| **Tier 2 — Domain Entities** | T-004, T-007, T-009 | 🟡🟡🟡 |
+| **Tier 3 — Ports & Basic UC** | T-005, T-008, T-010 | 🟢🟡🟢 |
+| **Tier 4 — Logic & Adapters** | T-006, T-011, T-012 | 🔴🟡🟢 |
+| **Tier 5 — UI Components** | T-013, T-014 | 🔴🔴 |
+| **Tier 6 — Apex** | T-015 | 🔴 |
 | **Total** | **15 tickets** | |
 
+### Dependency Pyramid 
+
 ```mermaid
-gantt
-    title Implementation Waves
-    dateFormat  YYYY-MM-DD
-    axisFormat  %b %d
+graph BT
+    %% Styling
+    classDef t1 fill:#e2f0d9,stroke:#385723,stroke-width:2px;
+    classDef t2 fill:#fff2cc,stroke:#d6b656,stroke-width:2px;
+    classDef t3 fill:#dae8fc,stroke:#6c8ebf,stroke-width:2px;
+    classDef t4 fill:#f8cecc,stroke:#b85450,stroke-width:2px;
+    classDef t5 fill:#e1d5e7,stroke:#9673a6,stroke-width:2px;
+    classDef t6 fill:#ffe6cc,stroke:#d79b00,stroke-width:2px;
 
-    section Wave 0
-    T-001 Money VO         :w0a, 2026-03-05, 1d
-    T-002 EventBus         :w0b, 2026-03-05, 2d
-    T-003 Fixtures         :w0c, 2026-03-05, 1d
+    %% Nodes
+    T001("T-001: Money VO"):::t1
+    T002("T-002: EventBus"):::t1
+    T003("T-003: Fixtures"):::t1
 
-    section Wave 1
-    T-004 Cart Aggregate   :w1a, after w0a, 2d
-    T-005 Cart Ports       :w1b, after w1a, 1d
-    T-006 Cart Use Cases   :w1c, after w1b, 3d
-    T-007 ProductVariant   :w1d, after w0a, 2d
-    T-008 Inventory UC     :w1e, after w1d, 2d
-    T-009 Coupon Aggregate :w1f, after w0a, 2d
-    T-010 Pricing UC       :w1g, after w1f, 1d
+    T004("T-004: Cart Aggregate"):::t2
+    T007("T-007: ProductVariant"):::t2
+    T009("T-009: Coupon Aggregate"):::t2
 
-    section Wave 2
-    T-011 Cart Adapters    :w2a, after w1c w1e w1g, 2d
-    T-012 Mock Repos       :w2b, after w0c w1e w1g, 1d
+    T005("T-005: Cart Ports"):::t3
+    T008("T-008: Inventory UC"):::t3
+    T010("T-010: Pricing UC"):::t3
 
-    section Wave 3
-    T-013 Cart UI          :w3a, after w2a, 3d
-    T-014 Order Summary    :w3b, after w2a, 3d
+    T006("T-006: Cart Use Cases"):::t4
+    T011("T-011: Context Adapters"):::t4
+    T012("T-012: Mock Repos"):::t4
 
-    section Wave 4
-    T-015 Checkout Flow    :w4a, after w3a w3b, 3d
+    T013("T-013: Cart UI"):::t5
+    T014("T-014: Order Summary UI"):::t5
+
+    T015("T-015: Checkout Flow"):::t6
+
+    %% Edges (Dependencies)
+    T004 -.-> T001
+    T007 -.-> T001
+    T009 -.-> T001
+
+    T005 --> T004
+    T008 --> T007
+    T010 --> T009
+
+    T006 --> T004 & T005 & T002
+    T011 --> T005 & T008 & T010
+    T012 --> T003 & T008 & T010
+
+    T013 --> T006 & T011
+    T014 --> T006 & T011
+
+    T015 --> T006 & T008 & T011 & T013 & T014
 ```
