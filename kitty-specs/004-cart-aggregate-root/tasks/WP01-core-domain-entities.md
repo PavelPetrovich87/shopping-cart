@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Core Domain Entities
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 28e408f446bd3ff67d793a9365ea42c8fce917dc
@@ -103,3 +103,4 @@ requirement_refs:
 - 2026-03-07T13:05:00Z -- antigravity -- lane=planned -- Prompt created.
 - 2026-03-07T13:21:27Z – antigravity – shell_pid=57062 – lane=doing – Assigned agent via workflow command
 - 2026-03-07T13:23:39Z – antigravity – shell_pid=57062 – lane=for_review – Implementation of core entities complete and tested.
+- 2026-03-07T13:36:00Z – antigravity – shell_pid=57062 – lane=doing – Started review via workflow command
