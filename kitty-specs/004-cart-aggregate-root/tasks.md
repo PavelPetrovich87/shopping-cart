@@ -73,10 +73,10 @@
 **Prompt**: `/tasks/WP03-coupon-integration.md`
 
 ### Included Subtasks
-- [ ] T012 Add `appliedCoupons` collection to `Cart` [FR-005]
-- [ ] T013 Implement `applyCoupon` and `removeCoupon` methods [FR-005, FR-006]
-- [ ] T014 Emit `CartCleared` event when all items are removed [FR-002]
-- [ ] T015 [P] Add unit tests for coupon-related logic in `Cart.spec.ts` [FR-005, FR-006]
+- [x] T012 Add `appliedCoupons` collection to `Cart` [FR-005]
+- [x] T013 Implement `applyCoupon` and `removeCoupon` methods [FR-005, FR-006]
+- [x] T014 Emit `CartCleared` event when all items are removed [FR-002]
+- [x] T015 [P] Add unit tests for coupon-related logic in `Cart.spec.ts` [FR-005, FR-006]
 
 ### Implementation Notes
 - Coupon validation itself is T-010, this task only handles the Cart's receipt of coupons.
