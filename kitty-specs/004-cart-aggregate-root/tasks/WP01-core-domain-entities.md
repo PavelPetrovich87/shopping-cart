@@ -1,8 +1,11 @@
 ---
 work_package_id: WP01
 title: Core Domain Entities
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 28e408f446bd3ff67d793a9365ea42c8fce917dc
+created_at: '2026-03-07T13:21:27.277032+00:00'
 subtasks:
 - T001
 - T002
@@ -10,6 +13,7 @@ subtasks:
 - T004
 - T005
 phase: Phase 1 - Domain Logic
+shell_pid: "57062"
 history:
 - timestamp: '2026-03-07T13:05:00Z'
   lane: planned
