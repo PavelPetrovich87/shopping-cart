@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Core Domain Entities
-lane: "doing"
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: 28e408f446bd3ff67d793a9365ea42c8fce917dc
@@ -15,6 +15,8 @@ subtasks:
 phase: Phase 1 - Domain Logic
 shell_pid: "57062"
 agent: "antigravity"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 history:
 - timestamp: '2026-03-07T13:05:00Z'
   lane: planned
@@ -104,3 +106,4 @@ requirement_refs:
 - 2026-03-07T13:21:27Z – antigravity – shell_pid=57062 – lane=doing – Assigned agent via workflow command
 - 2026-03-07T13:23:39Z – antigravity – shell_pid=57062 – lane=for_review – Implementation of core entities complete and tested.
 - 2026-03-07T13:36:00Z – antigravity – shell_pid=57062 – lane=doing – Started review via workflow command
+- 2026-03-07T13:36:40Z – antigravity – shell_pid=57062 – lane=done – Review passed: CartItem entity, Cart skeleton, and CartState enum correctly implemented. All invariants enforced, Money integration clean, 3/3 tests passing.
