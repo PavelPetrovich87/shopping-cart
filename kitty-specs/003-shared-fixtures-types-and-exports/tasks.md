@@ -9,10 +9,10 @@
 **Priority**: 🟢 High (Foundation)
 
 **Subtasks**:
-- [ ] **T001**: Define data record interfaces in `src/shared/fixtures/types.ts`
-- [ ] **T002**: Implement centralized data exports in `src/shared/fixtures/index.ts`
-- [ ] **T003**: Verify types and imports with `src/shared/fixtures/verify.test.ts`
-- [ ] **T004**: Cleanup temporary verification files
+- [x] **T001**: Define data record interfaces in `src/shared/fixtures/types.ts`
+- [x] **T002**: Implement centralized data exports in `src/shared/fixtures/index.ts`
+- [x] **T003**: Verify types and imports with `src/shared/fixtures/verify.test.ts`
+- [x] **T004**: Cleanup temporary verification files
 
 **Implementation Sketch**:
 1. Inspect `data/*.json` and create matching interfaces with `Record` suffix in `types.ts`.
