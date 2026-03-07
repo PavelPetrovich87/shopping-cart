@@ -1,8 +1,11 @@
 ---
 work_package_id: WP02
 title: Cart Logic & Domain Events
-lane: planned
+lane: "doing"
 dependencies: [WP01]
+base_branch: 004-cart-aggregate-root-WP01
+base_commit: db95a7fee0fc4d1c639e33108387ab917ac4489b
+created_at: '2026-03-07T13:29:23.160257+00:00'
 subtasks:
 - T006
 - T007
@@ -11,6 +14,7 @@ subtasks:
 - T010
 - T011
 phase: Phase 1 - Domain Logic
+shell_pid: "57062"
 history:
 - timestamp: '2026-03-07T13:06:00Z'
   lane: planned
