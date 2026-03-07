@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Cart Logic & Domain Events
-lane: "doing"
+lane: "done"
 dependencies: [WP01]
 base_branch: 004-cart-aggregate-root-WP01
 base_commit: db95a7fee0fc4d1c639e33108387ab917ac4489b
@@ -16,6 +16,8 @@ subtasks:
 phase: Phase 1 - Domain Logic
 shell_pid: "57062"
 agent: "antigravity"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 history:
 - timestamp: '2026-03-07T13:06:00Z'
   lane: planned
@@ -90,3 +92,4 @@ requirement_refs:
 - 2026-03-07T13:29:23Z – antigravity – shell_pid=57062 – lane=doing – Assigned agent via workflow command
 - 2026-03-07T13:34:10Z – antigravity – shell_pid=57062 – lane=for_review – Cart logic and domain events implemented and verified.
 - 2026-03-07T13:36:49Z – antigravity – shell_pid=57062 – lane=doing – Started review via workflow command
+- 2026-03-07T13:37:13Z – antigravity – shell_pid=57062 – lane=done – Review passed: Cart logic fully implemented with addItem/removeItem/changeQuantity, subtotal calc, domain event recording, and state transition guards. 14/14 tests passing.
