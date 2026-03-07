@@ -1,11 +1,15 @@
 ---
-work_package_id: "WP01"
-title: "Shared Fixtures Core Implementation"
-lane: "planned"
+work_package_id: WP01
+title: Shared Fixtures Core Implementation
+lane: "doing"
 dependencies: []
-requirement-refs: ["FR-001", "FR-002", "FR-003", "FR-004"]
-requirement_refs: ["FR-001", "FR-002", "FR-003", "FR-004"]
-subtasks: ["T001", "T002", "T003", "T004"]
+base_branch: main
+base_commit: 37b9102339e035509b23e50891dde6b3d33369ed
+created_at: '2026-03-07T13:22:38.287703+00:00'
+subtasks: [T001, T002, T003, T004]
+requirement-refs: [FR-001, FR-002, FR-003, FR-004]
+requirement_refs: [FR-001, FR-002, FR-003, FR-004]
+shell_pid: "57062"
 ---
 
 # WP01: Shared Fixtures Core Implementation
