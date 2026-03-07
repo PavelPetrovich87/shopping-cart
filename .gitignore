@@ -25,3 +25,5 @@ dist-ssr
 
 # Project specifics
 .kittify/workspaces/
+.worktrees/
+.tmp-oh-my-ag/
