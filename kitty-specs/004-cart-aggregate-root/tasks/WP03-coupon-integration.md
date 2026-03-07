@@ -13,6 +13,7 @@ subtasks:
 - T015
 phase: Phase 1 - Domain Logic
 shell_pid: "57062"
+agent: "antigravity"
 history:
 - timestamp: '2026-03-07T13:07:00Z'
   lane: planned
@@ -50,3 +51,4 @@ requirement_refs:
 ## Activity Log
 
 - 2026-03-07T13:07:00Z -- antigravity -- lane=planned -- Prompt created.
+- 2026-03-07T13:39:05Z – antigravity – shell_pid=57062 – lane=doing – Assigned agent via workflow command
