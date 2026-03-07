@@ -1,14 +1,18 @@
 ---
 work_package_id: WP03
 title: Coupon Integration
-lane: planned
+lane: "doing"
 dependencies: [WP02]
+base_branch: 004-cart-aggregate-root-WP02
+base_commit: a77b51f99ce6274531e0f244d3ca9bcc8069da78
+created_at: '2026-03-07T13:39:05.457412+00:00'
 subtasks:
 - T012
 - T013
 - T014
 - T015
 phase: Phase 1 - Domain Logic
+shell_pid: "57062"
 history:
 - timestamp: '2026-03-07T13:07:00Z'
   lane: planned
