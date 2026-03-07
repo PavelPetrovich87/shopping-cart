@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Cart Logic & Domain Events
-lane: "doing"
+lane: "for_review"
 dependencies: [WP01]
 base_branch: 004-cart-aggregate-root-WP01
 base_commit: db95a7fee0fc4d1c639e33108387ab917ac4489b
@@ -88,3 +88,4 @@ requirement_refs:
 
 - 2026-03-07T13:06:00Z -- antigravity -- lane=planned -- Prompt created.
 - 2026-03-07T13:29:23Z – antigravity – shell_pid=57062 – lane=doing – Assigned agent via workflow command
+- 2026-03-07T13:34:10Z – antigravity – shell_pid=57062 – lane=for_review – Cart logic and domain events implemented and verified.
