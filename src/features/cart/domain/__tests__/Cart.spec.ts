@@ -1,12 +1,10 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { Cart } from '../Cart';
 import { Money } from '@/shared/domain/Money';
 import { CartState } from '../CartState';
-import {
+import type {
     ItemAddedToCart,
-    CartItemQuantityChanged,
-    ItemRemovedFromCart,
-    CartCleared
+    CartItemQuantityChanged
 } from '../CartEvents';
 
 describe('Cart', () => {
@@ -127,6 +125,31 @@ describe('Cart', () => {
             expect(() => cart.addItem('sku2', 1, mockPrice)).toThrow('Cannot modify cart in state: Checkout_Pending');
             expect(() => cart.removeItem(skuId)).toThrow('Cannot modify cart in state: Checkout_Pending');
             expect(() => cart.changeQuantity(skuId, 2)).toThrow('Cannot modify cart in state: Checkout_Pending');
+            expect(() => cart.applyCoupon('SAVE10')).toThrow('Cannot modify cart in state: Checkout_Pending');
+            expect(() => cart.removeCoupon('SAVE10')).toThrow('Cannot modify cart in state: Checkout_Pending');
+        });
+    });
+
+    describe('Coupons', () => {
+        it('should apply and remove coupons', () => {
+            cart.applyCoupon('SAVE10');
+            expect(cart.appliedCoupons).toContain('SAVE10');
+            expect(cart.appliedCoupons).toHaveLength(1);
+
+            cart.applyCoupon('FREESHIP');
+            expect(cart.appliedCoupons).toContain('FREESHIP');
+            expect(cart.appliedCoupons).toHaveLength(2);
+
+            cart.removeCoupon('SAVE10');
+            expect(cart.appliedCoupons).not.toContain('SAVE10');
+            expect(cart.appliedCoupons).toContain('FREESHIP');
+            expect(cart.appliedCoupons).toHaveLength(1);
+        });
+
+        it('should ignore duplicate coupons', () => {
+            cart.applyCoupon('SAVE10');
+            cart.applyCoupon('SAVE10');
+            expect(cart.appliedCoupons).toHaveLength(1);
         });
     });
 });

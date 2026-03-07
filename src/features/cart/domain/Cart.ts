@@ -16,6 +16,7 @@ import type {
 export class Cart {
     public readonly id: string;
     public readonly items: Map<string, CartItem>;
+    private _appliedCoupons: string[] = [];
     private _state: CartState;
     private _events: DomainEvent[] = [];
     public readonly createdAt: Date;
@@ -24,6 +25,7 @@ export class Cart {
     constructor(id: string) {
         this.id = id;
         this.items = new Map<string, CartItem>();
+        this._appliedCoupons = [];
         this._state = CartState.Active;
         this.createdAt = new Date();
         this._updatedAt = new Date();
@@ -31,6 +33,10 @@ export class Cart {
 
     public get state(): CartState {
         return this._state;
+    }
+
+    public get appliedCoupons(): string[] {
+        return [...this._appliedCoupons];
     }
 
     public get updatedAt(): Date {
@@ -143,6 +149,27 @@ export class Cart {
                 newQuantity
             }
         } as CartItemQuantityChanged);
+        this.touch();
+    }
+
+    /**
+     * Applies a coupon code to the cart.
+     * Note: Validation is handled at the application layer.
+     */
+    public applyCoupon(code: string): void {
+        this.ensureActive();
+        if (!this._appliedCoupons.includes(code)) {
+            this._appliedCoupons.push(code);
+            this.touch();
+        }
+    }
+
+    /**
+     * Removes an applied coupon code.
+     */
+    public removeCoupon(code: string): void {
+        this.ensureActive();
+        this._appliedCoupons = this._appliedCoupons.filter(c => c !== code);
         this.touch();
     }
 
