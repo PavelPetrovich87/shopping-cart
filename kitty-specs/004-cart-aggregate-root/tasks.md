@@ -46,12 +46,12 @@
 **Prompt**: `/tasks/WP02-cart-logic-and-events.md`
 
 ### Included Subtasks
-- [ ] T006 Implement `addItem` logic in `Cart.ts` with incrementing support [FR-001]
-- [ ] T007 Implement `removeItem` and `changeQuantity` logic in `Cart.ts` [FR-002, FR-003]
-- [ ] T008 Implement `subtotal` calculation using `Money` [FR-004]
-- [ ] T009 Integrate `EventBus` to emit `ItemAddedToCart`, `CartItemQuantityChanged`, etc. [FR-001, FR-002, FR-003]
-- [ ] T010 Implement state transitions: `initiateCheckout` and `markCheckedOut` [FR-008, FR-009]
-- [ ] T011 [P] Comprehensive unit tests for `Cart` invariants and event emission in `src/features/cart/domain/__tests__/Cart.spec.ts` [FR-001, FR-002, FR-003, FR-008, FR-009]
+- [x] T006 Implement `addItem` logic in `Cart.ts` with incrementing support [FR-001]
+- [x] T007 Implement `removeItem` and `changeQuantity` logic in `Cart.ts` [FR-002, FR-003]
+- [x] T008 Implement `subtotal` calculation using `Money` [FR-004]
+- [x] T009 Integrate `EventBus` to emit `ItemAddedToCart`, `CartItemQuantityChanged`, etc. [FR-001, FR-002, FR-003]
+- [x] T010 Implement state transitions: `initiateCheckout` and `markCheckedOut` [FR-008, FR-009]
+- [x] T011 [P] Comprehensive unit tests for `Cart` invariants and event emission in `src/features/cart/domain/__tests__/Cart.spec.ts` [FR-001, FR-002, FR-003, FR-008, FR-009]
 
 ### Implementation Notes
 - Use the `shared/events` infrastructure for event emission.
