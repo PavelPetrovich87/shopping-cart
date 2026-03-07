@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Coupon Integration
-lane: "doing"
+lane: "for_review"
 dependencies: [WP02]
 base_branch: 004-cart-aggregate-root-WP02
 base_commit: a77b51f99ce6274531e0f244d3ca9bcc8069da78
@@ -52,3 +52,4 @@ requirement_refs:
 
 - 2026-03-07T13:07:00Z -- antigravity -- lane=planned -- Prompt created.
 - 2026-03-07T13:39:05Z – antigravity – shell_pid=57062 – lane=doing – Assigned agent via workflow command
+- 2026-03-07T13:40:44Z – antigravity – shell_pid=57062 – lane=for_review – Coupon integration and refined cart cleared event implemented and tested.
