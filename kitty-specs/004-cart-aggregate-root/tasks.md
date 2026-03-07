@@ -17,11 +17,11 @@
 **Prompt**: `/tasks/WP01-core-domain-entities.md`
 
 ### Included Subtasks
-- [ ] T001 Implement `CartItem` entity in `src/features/cart/domain/CartItem.ts` [FR-001]
-- [ ] T002 Implement `Cart` aggregate root skeleton in `src/features/cart/domain/Cart.ts` [FR-001]
-- [ ] T003 Define `CartState` enum in `src/features/cart/domain/CartState.ts` [FR-007]
-- [ ] T004 Add `Money` integration to `CartItem` for price tracking [FR-004]
-- [ ] T005 [P] Create initial unit tests for `CartItem` in `src/features/cart/domain/__tests__/CartItem.spec.ts` [FR-001]
+- [x] T001 Implement `CartItem` entity in `src/features/cart/domain/CartItem.ts` [FR-001]
+- [x] T002 Implement `Cart` aggregate root skeleton in `src/features/cart/domain/Cart.ts` [FR-001]
+- [x] T003 Define `CartState` enum in `src/features/cart/domain/CartState.ts` [FR-007]
+- [x] T004 Add `Money` integration to `CartItem` for price tracking [FR-004]
+- [x] T005 [P] Create initial unit tests for `CartItem` in `src/features/cart/domain/__tests__/CartItem.spec.ts` [FR-001]
 
 ### Implementation Notes
 - Follow the DDD patterns established in Tier 1.
