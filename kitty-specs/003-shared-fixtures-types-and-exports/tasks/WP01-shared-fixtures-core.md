@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Shared Fixtures Core Implementation
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 37b9102339e035509b23e50891dde6b3d33369ed
@@ -10,6 +10,7 @@ subtasks: [T001, T002, T003, T004]
 requirement-refs: [FR-001, FR-002, FR-003, FR-004]
 requirement_refs: [FR-001, FR-002, FR-003, FR-004]
 shell_pid: "57062"
+agent: "Antigravity"
 ---
 
 # WP01: Shared Fixtures Core Implementation
@@ -72,3 +73,4 @@ The project uses JSON files in `data/` to represent raw data from external sourc
 ## Activity Log
 
 - 2026-03-07T13:24:09Z – unknown – shell_pid=57062 – lane=for_review – Type-safe shared fixtures implemented and verified.
+- 2026-03-07T13:32:57Z – Antigravity – shell_pid=57062 – lane=doing – Started review via workflow command
