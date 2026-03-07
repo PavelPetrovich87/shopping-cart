@@ -3,6 +3,8 @@ work_package_id: "WP01"
 title: "Shared Fixtures Core Implementation"
 lane: "planned"
 dependencies: []
+requirement-refs: ["FR-001", "FR-002", "FR-003", "FR-004"]
+requirement_refs: ["FR-001", "FR-002", "FR-003", "FR-004"]
 subtasks: ["T001", "T002", "T003", "T004"]
 ---
 
