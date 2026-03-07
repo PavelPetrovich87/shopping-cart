@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Coupon Integration
-lane: "doing"
+lane: "done"
 dependencies: [WP02]
 base_branch: 004-cart-aggregate-root-WP02
 base_commit: a77b51f99ce6274531e0f244d3ca9bcc8069da78
@@ -14,6 +14,8 @@ subtasks:
 phase: Phase 1 - Domain Logic
 shell_pid: "60045"
 agent: "antigravity"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 history:
 - timestamp: '2026-03-07T13:07:00Z'
   lane: planned
@@ -54,3 +56,4 @@ requirement_refs:
 - 2026-03-07T13:39:05Z – antigravity – shell_pid=57062 – lane=doing – Assigned agent via workflow command
 - 2026-03-07T13:40:44Z – antigravity – shell_pid=57062 – lane=for_review – Coupon integration and refined cart cleared event implemented and tested.
 - 2026-03-07T13:41:40Z – antigravity – shell_pid=60045 – lane=doing – Started review via workflow command
+- 2026-03-07T13:42:16Z – antigravity – shell_pid=60045 – lane=done – Review passed: appliedCoupons correctly encapsulated with idempotent apply, proper state guards, and CartCleared event verified. 16/16 tests passing across all files.
