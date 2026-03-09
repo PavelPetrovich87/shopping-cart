@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Domain Events Integration
-lane: "doing"
+lane: "done"
 dependencies: [WP02]
 base_branch: 005-coupon-aggregate-root-WP02
 base_commit: abe8e80b9311664d95cb46d741ddaa472810dfb4
@@ -11,6 +11,8 @@ requirement_refs:
 - FR-6
 requirements: [FR-6]
 shell_pid: "20153"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # Objective
@@ -59,3 +61,7 @@ According to the project constitution, domain entities must remain pure and shou
 ---
 To implement this work package, run:
 `spec-kitty implement WP03 --base WP02`
+
+## Activity Log
+
+- 2026-03-09T14:05:07Z – unknown – shell_pid=20153 – lane=done – WP03 implemented: Domain events for coupon validation and discount calculation
