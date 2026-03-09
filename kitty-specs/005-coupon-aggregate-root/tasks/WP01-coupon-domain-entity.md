@@ -53,10 +53,10 @@ The project uses DDD and Hexagonal Architecture. The `Coupon` aggregate root mus
 - `src/features/pricing/domain/__tests__/Coupon.spec.ts` (new)
 
 # Definition of Done
-- [ ] `Coupon` can be instantiated with valid data.
-- [ ] `Coupon.create()` throws Zod error with invalid data (e.g., negative percentage).
-- [ ] `validate()` correctly identifies inactive and expired coupons.
-- [ ] Unit tests cover all schema invariants and validation states.
+- [x] `Coupon` can be instantiated with valid data.
+- [x] `Coupon.create()` throws Zod error with invalid data (e.g., negative percentage).
+- [x] `validate()` correctly identifies inactive and expired coupons.
+- [x] Unit tests cover all schema invariants and validation states.
 
 # Reviewer Guidance
 - Ensure Zod schema is strictly defined and reflects the domain requirements.
