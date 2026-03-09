@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Foundation & Availability Calculation
-lane: "doing"
+lane: "for_review"
 dependencies: []
 base_branch: main
 base_commit: de3ca048ab6359e5e37dbbdd88134d019eb469e1
@@ -67,3 +67,4 @@ spec-kitty implement WP01
 ## Activity Log
 
 - 2026-03-09T13:45:50Z – Gemini – shell_pid=15527 – lane=doing – Assigned agent via workflow command
+- 2026-03-09T13:50:38Z – Gemini – shell_pid=15527 – lane=for_review – Implemented StockReservation VO and ProductVariant AR with availableStock logic. Verified with unit tests.
