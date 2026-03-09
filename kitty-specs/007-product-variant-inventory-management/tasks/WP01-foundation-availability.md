@@ -12,6 +12,7 @@ requirement_refs:
 - FR-003
 requirements: [FR-001, FR-003]
 shell_pid: "15527"
+agent: "Gemini"
 ---
 
 # WP01: Foundation & Availability Calculation
@@ -62,3 +63,7 @@ In our system, `ProductVariant` is an Aggregate Root that manages inventory. It 
 ```bash
 spec-kitty implement WP01
 ```
+
+## Activity Log
+
+- 2026-03-09T13:45:50Z – Gemini – shell_pid=15527 – lane=doing – Assigned agent via workflow command
