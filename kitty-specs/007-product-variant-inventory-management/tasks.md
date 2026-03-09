@@ -23,10 +23,10 @@
 **Test Criteria**: Reservation fails if `availableStock < qty`; Depletion correctly updates physical stock.
 **Requirements**: FR-004, FR-005
 
-- [ ] T004 Implement `reserve(orderId, qty, ttl, now)` with validation [FR-004, FR-005]
-- [ ] T005 Implement `releaseReservation(orderId)` [FR-004, FR-005]
-- [ ] T006 Implement `confirmDepletion(orderId)` [FR-004, FR-005]
-- [ ] T010 Integrate domain event collection within the AR [FR-005]
+- [x] T004 Implement `reserve(orderId, qty, ttl, now)` with validation [FR-004, FR-005]
+- [x] T005 Implement `releaseReservation(orderId)` [FR-004, FR-005]
+- [x] T006 Implement `confirmDepletion(orderId)` [FR-004, FR-005]
+- [x] T010 Integrate domain event collection within the AR [FR-005]
 
 ---
 
