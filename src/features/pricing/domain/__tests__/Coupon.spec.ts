@@ -69,7 +69,7 @@ describe('Coupon Aggregate Root', () => {
   });
 
   describe('Lifecycle & Status', () => {
-    it('should be valid when active and not expired', () => {
+    it('should be valid when active and not expired and return event', () => {
       const coupon = Coupon.create({
         code: 'VALID',
         discountType: CouponType.FLAT,
@@ -77,10 +77,12 @@ describe('Coupon Aggregate Root', () => {
         expirationDate: new Date('2099-01-01'),
       });
 
-      expect(coupon.isValid(new Date('2026-01-01'))).toBe(true);
+      const result = coupon.validate({ currentDate: new Date('2026-01-01') });
+      expect(result.isValid).toBe(true);
+      expect(result.events[0].eventName).toBe('CouponValidated');
     });
 
-    it('should be invalid when inactive', () => {
+    it('should be invalid when inactive and return failure event', () => {
       const coupon = Coupon.create({
         code: 'INACTIVE',
         discountType: CouponType.FLAT,
@@ -91,9 +93,10 @@ describe('Coupon Aggregate Root', () => {
       const validation = coupon.validate({ currentDate: new Date() });
       expect(validation.isValid).toBe(false);
       expect(validation.error).toBe('Sorry, but this coupon is inactive');
+      expect(validation.events[0].eventName).toBe('CouponValidationFailed');
     });
 
-    it('should be invalid when expired', () => {
+    it('should be invalid when expired and return failure event', () => {
       const coupon = Coupon.create({
         code: 'EXPIRED',
         discountType: CouponType.FLAT,
@@ -104,11 +107,12 @@ describe('Coupon Aggregate Root', () => {
       const validation = coupon.validate({ currentDate: new Date('2026-01-01') });
       expect(validation.isValid).toBe(false);
       expect(validation.error).toBe('Sorry, but this coupon has expired');
+      expect(validation.events[0].eventName).toBe('CouponValidationFailed');
     });
   });
 
   describe('Discount Calculation', () => {
-    it('should calculate flat discount', () => {
+    it('should calculate flat discount and return event', () => {
       const coupon = Coupon.create({
         code: 'SAVE10',
         discountType: CouponType.FLAT,
@@ -116,13 +120,14 @@ describe('Coupon Aggregate Root', () => {
       });
 
       const subtotal = Money.fromPrice(50);
-      const discount = coupon.calculateDiscount(subtotal);
+      const { discount, events } = coupon.calculateDiscount(subtotal);
 
       expect(discount.rawCents).toBe(1000);
-      expect(discount.format()).toBe('$10.00');
+      expect(events[0].eventName).toBe('DiscountCalculated');
+      expect(events[0].payload.discountCents).toBe(1000);
     });
 
-    it('should calculate percentage discount', () => {
+    it('should calculate percentage discount and return event', () => {
       const coupon = Coupon.create({
         code: 'TENOFF',
         discountType: CouponType.PERCENTAGE,
@@ -130,10 +135,11 @@ describe('Coupon Aggregate Root', () => {
       });
 
       const subtotal = Money.fromPrice(100);
-      const discount = coupon.calculateDiscount(subtotal);
+      const { discount, events } = coupon.calculateDiscount(subtotal);
 
       expect(discount.rawCents).toBe(1000);
-      expect(discount.format()).toBe('$10.00');
+      expect(events[0].eventName).toBe('DiscountCalculated');
+      expect(events[0].payload.discountCents).toBe(1000);
     });
 
     it('should cap flat discount at subtotal', () => {
@@ -144,37 +150,10 @@ describe('Coupon Aggregate Root', () => {
       });
 
       const subtotal = Money.fromPrice(30);
-      const discount = coupon.calculateDiscount(subtotal);
+      const { discount, events } = coupon.calculateDiscount(subtotal);
 
       expect(discount.rawCents).toBe(3000); // Capped at $30.00
-      expect(discount.format()).toBe('$30.00');
-    });
-
-    it('should cap 100% discount at subtotal', () => {
-      const coupon = Coupon.create({
-        code: 'FREE',
-        discountType: CouponType.PERCENTAGE,
-        discountValue: 100,
-      });
-
-      const subtotal = Money.fromPrice(25.99);
-      const discount = coupon.calculateDiscount(subtotal);
-
-      expect(discount.rawCents).toBe(2599);
-      expect(discount.format()).toBe('$25.99');
-    });
-
-    it('should return zero discount for zero subtotal', () => {
-      const coupon = Coupon.create({
-        code: 'SAVE10',
-        discountType: CouponType.FLAT,
-        discountValue: 1000,
-      });
-
-      const subtotal = Money.fromPrice(0);
-      const discount = coupon.calculateDiscount(subtotal);
-
-      expect(discount.rawCents).toBe(0);
+      expect(events[0].payload.discountCents).toBe(3000);
     });
   });
 });

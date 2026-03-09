@@ -1,5 +1,11 @@
 import { z } from 'zod';
 import { Money } from '@/shared/domain/Money';
+import { DomainEvent } from '@/shared/events/DomainEvent';
+import { 
+  createCouponValidatedEvent, 
+  createCouponValidationFailedEvent, 
+  createDiscountCalculatedEvent 
+} from './events/CouponEvents';
 
 export const CouponType = {
   FLAT: 'FLAT',
@@ -63,16 +69,29 @@ export class Coupon {
   /**
    * Internal validation logic for status and expiration.
    */
-  public validate(context: { currentDate: Date }): { isValid: boolean; error?: string } {
+  public validate(context: { currentDate: Date }): { isValid: boolean; error?: string; events: DomainEvent[] } {
     if (this.props.status === CouponStatus.INACTIVE) {
-      return { isValid: false, error: 'Sorry, but this coupon is inactive' };
+      const error = 'Sorry, but this coupon is inactive';
+      return { 
+        isValid: false, 
+        error, 
+        events: [createCouponValidationFailedEvent(this.props.code, error)] 
+      };
     }
 
     if (this.props.expirationDate && context.currentDate > this.props.expirationDate) {
-      return { isValid: false, error: 'Sorry, but this coupon has expired' };
+      const error = 'Sorry, but this coupon has expired';
+      return { 
+        isValid: false, 
+        error, 
+        events: [createCouponValidationFailedEvent(this.props.code, error)] 
+      };
     }
 
-    return { isValid: true };
+    return { 
+      isValid: true, 
+      events: [createCouponValidatedEvent(this.props.code)] 
+    };
   }
 
   /**
@@ -86,7 +105,7 @@ export class Coupon {
    * Calculates the discount amount for a given subtotal.
    * Ensures the discount never exceeds the subtotal.
    */
-  public calculateDiscount(subtotal: Money): Money {
+  public calculateDiscount(subtotal: Money): { discount: Money; events: DomainEvent[] } {
     let discountAmount: Money;
 
     if (this.props.discountType === CouponType.FLAT) {
@@ -98,9 +117,12 @@ export class Coupon {
 
     // Cap the discount at the subtotal to prevent negative totals
     if (discountAmount.rawCents > subtotal.rawCents) {
-      return subtotal;
+      discountAmount = subtotal;
     }
 
-    return discountAmount;
+    return {
+      discount: discountAmount,
+      events: [createDiscountCalculatedEvent(this.props.code, subtotal, discountAmount)]
+    };
   }
 }
