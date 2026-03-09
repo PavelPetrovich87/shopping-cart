@@ -46,9 +46,9 @@
 **Prompt**: `/kitty-specs/006-cart-driven-port-interfaces/tasks/WP02-cart-application-ports.md`
 
 ### Included Subtasks
-- [ ] T004 Create `src/features/cart/application/ports/ICartRepository.ts` [FR-01, FR-04]
-- [ ] T005 Create `src/features/cart/application/ports/IInventoryService.ts` [FR-02, FR-04]
-- [ ] T006 Create `src/features/cart/application/ports/IPricingService.ts` [FR-03, FR-04]
+- [x] T004 Create `src/features/cart/application/ports/ICartRepository.ts` [FR-01, FR-04]
+- [x] T005 Create `src/features/cart/application/ports/IInventoryService.ts` [FR-02, FR-04]
+- [x] T006 Create `src/features/cart/application/ports/IPricingService.ts` [FR-03, FR-04]
 
 ### Implementation Notes
 - Use the Markdown contracts in `contracts/` as the primary reference for method signatures.
