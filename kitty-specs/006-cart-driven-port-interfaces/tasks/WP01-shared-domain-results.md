@@ -1,13 +1,17 @@
 ---
 work_package_id: WP01
 title: Shared Domain Results
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 4a9afa3bc08332cfb15d03bbbcf1e7db48493dbf
+created_at: '2026-03-09T13:52:35.258352+00:00'
 subtasks:
 - T001
 - T002
 - T003
 phase: Phase 1 - Foundational Domain
+shell_pid: "17075"
 history:
 - timestamp: '2026-03-09T13:52:00Z'
   lane: planned
