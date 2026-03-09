@@ -1,13 +1,17 @@
 ---
 work_package_id: WP01
 title: Foundation & Availability Calculation
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: de3ca048ab6359e5e37dbbdd88134d019eb469e1
+created_at: '2026-03-09T13:45:49.505630+00:00'
 subtasks: [T001, T002, T003]
 requirement_refs:
 - FR-001
 - FR-003
 requirements: [FR-001, FR-003]
+shell_pid: "15527"
 ---
 
 # WP01: Foundation & Availability Calculation
