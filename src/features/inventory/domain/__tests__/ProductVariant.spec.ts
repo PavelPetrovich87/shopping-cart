@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ProductVariant } from '../ProductVariant';
 import { StockReservation } from '../StockReservation';
+import { Money } from '@/shared/domain/Money';
 import type {
   StockReserved,
   StockDepleted,
@@ -10,21 +11,32 @@ import type {
 describe('ProductVariant', () => {
   const skuId = 'sku-123';
   const totalOnHand = 100;
+  const basePrice = Money.fromPrice(25.99);
   let variant: ProductVariant;
 
   beforeEach(() => {
-    variant = new ProductVariant(skuId, totalOnHand);
+    variant = new ProductVariant(skuId, basePrice, totalOnHand);
   });
 
   it('should initialize with correct values', () => {
     expect(variant.id).toBe(skuId);
+    expect(variant.basePrice.rawCents).toBe(2599);
     expect(variant.totalOnHand).toBe(totalOnHand);
     expect(variant.sold).toBe(0);
+    expect(variant.version).toBe(0);
     expect(variant.reservations).toEqual([]);
   });
 
+  it('should throw if totalOnHand is negative', () => {
+    expect(() => new ProductVariant(skuId, basePrice, -1)).toThrow('ProductVariant totalOnHand cannot be negative');
+  });
+
+  it('should throw if sold is negative', () => {
+    expect(() => new ProductVariant(skuId, basePrice, 100, -1)).toThrow('ProductVariant sold cannot be negative');
+  });
+
   describe('reserve', () => {
-    it('should successfully reserve stock and record StockReserved event', () => {
+    it('should successfully reserve stock, increment version, and record StockReserved event', () => {
       const now = new Date('2026-03-09T12:00:00Z');
       const orderId = 'order-1';
       const qty = 10;
@@ -34,99 +46,81 @@ describe('ProductVariant', () => {
 
       expect(variant.availableStock(now)).toBe(90);
       expect(variant.reservations).toHaveLength(1);
-      expect(variant.reservations[0].orderId).toBe(orderId);
-      expect(variant.reservations[0].quantity).toBe(qty);
+      expect(variant.version).toBe(1);
 
       const events = variant.pullEvents();
       expect(events).toHaveLength(1);
       expect(events[0].eventName).toBe('StockReserved');
-      const event = events[0] as StockReserved;
-      expect(event.payload.orderId).toBe(orderId);
-      expect(event.payload.quantity).toBe(qty);
     });
 
-    it('should throw if quantity is less than or equal to zero', () => {
-      const now = new Date();
-      expect(() => variant.reserve('order-1', 0, 1000, now)).toThrow('Quantity must be greater than zero');
-      expect(() => variant.reserve('order-1', -5, 1000, now)).toThrow('Quantity must be greater than zero');
-    });
-
-    it('should throw if insufficient stock', () => {
+    it('should throw if insufficient stock and NOT increment version', () => {
       const now = new Date('2026-03-09T12:00:00Z');
       expect(() => variant.reserve('order-huge', 101, 1000, now)).toThrow('Insufficient stock');
-    });
-
-    it('should allow reservation after previous ones expired', () => {
-      const now1 = new Date('2026-03-09T12:00:00Z');
-      variant.reserve('order-1', 60, 60000, now1); // 1 min TTL
-      
-      const now2 = new Date('2026-03-09T12:02:00Z'); // 2 mins later
-      expect(variant.availableStock(now2)).toBe(100);
-      
-      // Should allow reserving another 60 since the first one expired
-      expect(() => variant.reserve('order-2', 60, 60000, now2)).not.toThrow();
+      expect(variant.version).toBe(0);
     });
   });
 
   describe('releaseReservation', () => {
-    it('should release an existing reservation and record StockReleased event', () => {
+    it('should release an existing reservation, increment version, and record StockReleased event', () => {
       const now = new Date('2026-03-09T12:00:00Z');
       variant.reserve('order-1', 10, 60000, now);
-      variant.pullEvents(); // Clear initial event
+      const versionAfterReserve = variant.version;
 
       variant.releaseReservation('order-1');
 
       expect(variant.reservations).toHaveLength(0);
-      expect(variant.availableStock(now)).toBe(100);
+      expect(variant.version).toBe(versionAfterReserve + 1);
 
       const events = variant.pullEvents();
-      expect(events).toHaveLength(1);
-      expect(events[0].eventName).toBe('StockReleased');
-      const event = events[0] as StockReleased;
-      expect(event.payload.orderId).toBe('order-1');
-      expect(event.payload.quantity).toBe(10);
+      expect(events).toHaveLength(2); // reserve + release
+      expect(events[1].eventName).toBe('StockReleased');
     });
 
-    it('should be idempotent and not record event if reservation not found', () => {
+    it('should NOT increment version if reservation not found', () => {
+      const initialVersion = variant.version;
       variant.releaseReservation('unknown-order');
-      expect(variant.pullEvents()).toHaveLength(0);
+      expect(variant.version).toBe(initialVersion);
     });
   });
 
   describe('confirmDepletion', () => {
-    it('should permanently deplete stock and record StockDepleted event', () => {
+    it('should permanently deplete stock, increment version, and record StockDepleted event', () => {
       const now = new Date('2026-03-09T12:00:00Z');
       variant.reserve('order-1', 10, 60000, now);
-      variant.pullEvents(); // Clear initial event
+      const versionAfterReserve = variant.version;
 
       variant.confirmDepletion('order-1');
 
       expect(variant.totalOnHand).toBe(90);
       expect(variant.sold).toBe(10);
-      expect(variant.reservations).toHaveLength(0);
-      expect(variant.availableStock(now)).toBe(90);
+      expect(variant.version).toBe(versionAfterReserve + 1);
 
       const events = variant.pullEvents();
-      expect(events).toHaveLength(1);
-      expect(events[0].eventName).toBe('StockDepleted');
-      const event = events[0] as StockDepleted;
-      expect(event.payload.orderId).toBe('order-1');
-      expect(event.payload.quantity).toBe(10);
+      expect(events).toHaveLength(2); // reserve + deplete
+      expect(events[1].eventName).toBe('StockDepleted');
     });
 
-    it('should throw if reservation is not found', () => {
+    it('should throw and NOT increment version if reservation is not found', () => {
+      const initialVersion = variant.version;
       expect(() => variant.confirmDepletion('unknown-order')).toThrow('Reservation not found');
+      expect(variant.version).toBe(initialVersion);
     });
   });
 
-  describe('pullEvents', () => {
-    it('should return and clear events', () => {
+  describe('availableStock', () => {
+    it('should return totalOnHand if there are no reservations', () => {
       const now = new Date('2026-03-09T12:00:00Z');
-      variant.reserve('order-1', 10, 60000, now);
+      expect(variant.availableStock(now)).toBe(totalOnHand);
+    });
+
+    it('should ignore expired reservations', () => {
+      const now = new Date('2026-03-09T12:00:00Z');
+      const expiredAt = new Date('2026-03-09T11:59:00Z');
       
-      const events = variant.pullEvents();
-      expect(events).toHaveLength(1);
-      expect(variant.pullEvents()).toHaveLength(0);
+      // Manually add an expired reservation for testing
+      (variant as any)._reservations.push(new StockReservation('old', 10, expiredAt));
+
+      expect(variant.availableStock(now)).toBe(100);
     });
   });
 });

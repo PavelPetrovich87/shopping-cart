@@ -1,5 +1,6 @@
 import { StockReservation } from './StockReservation';
 import type { DomainEvent } from '@/shared/events/DomainEvent';
+import { Money } from '@/shared/domain/Money';
 import type {
   StockReserved,
   StockDepleted,
@@ -12,12 +13,14 @@ import type {
  */
 export class ProductVariant {
   public readonly id: string;
+  public readonly basePrice: Money;
   private _totalOnHand: number;
   private _sold: number;
+  private _version: number;
   private _reservations: StockReservation[];
   private _events: DomainEvent[] = [];
 
-  public constructor(id: string, totalOnHand: number, sold: number = 0) {
+  public constructor(id: string, basePrice: Money, totalOnHand: number, sold: number = 0, version: number = 0) {
     if (totalOnHand < 0) {
       throw new Error(`ProductVariant totalOnHand cannot be negative: ${totalOnHand}`);
     }
@@ -25,8 +28,10 @@ export class ProductVariant {
       throw new Error(`ProductVariant sold cannot be negative: ${sold}`);
     }
     this.id = id;
+    this.basePrice = basePrice;
     this._totalOnHand = totalOnHand;
     this._sold = sold;
+    this._version = version;
     this._reservations = [];
   }
 
@@ -36,6 +41,10 @@ export class ProductVariant {
 
   public get sold(): number {
     return this._sold;
+  }
+
+  public get version(): number {
+    return this._version;
   }
 
   public get reservations(): StockReservation[] {
@@ -78,6 +87,7 @@ export class ProductVariant {
     const expiresAt = new Date(now.getTime() + ttl_ms);
     const reservation = new StockReservation(orderId, qty, expiresAt);
     this._reservations.push(reservation);
+    this._version++;
 
     this.recordEvent({
       eventName: 'StockReserved',
@@ -101,6 +111,7 @@ export class ProductVariant {
     if (resIndex !== -1) {
       const reservation = this._reservations[resIndex];
       this._reservations.splice(resIndex, 1);
+      this._version++;
 
       this.recordEvent({
         eventName: 'StockReleased',
@@ -135,6 +146,7 @@ export class ProductVariant {
     this._totalOnHand -= reservation.quantity;
     this._sold += reservation.quantity;
     this._reservations.splice(resIndex, 1);
+    this._version++;
 
     this.recordEvent({
       eventName: 'StockDepleted',
