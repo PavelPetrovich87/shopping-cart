@@ -8,9 +8,9 @@
 **Test Criteria**: `availableStock` correctly ignores expired reservations and includes active ones.
 **Requirements**: FR-001, FR-003
 
-- [ ] T001 Implement `StockReservation` Value Object [FR-003]
-- [ ] T002 Implement `ProductVariant` Aggregate Root properties and constructor [FR-001]
-- [ ] T003 Implement `availableStock` logic with expiry date comparison [FR-003]
+- [x] T001 Implement `StockReservation` Value Object [FR-003]
+- [x] T002 Implement `ProductVariant` Aggregate Root properties and constructor [FR-001]
+- [x] T003 Implement `availableStock` logic with expiry date comparison [FR-003]
 
 ---
 
