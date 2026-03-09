@@ -1,14 +1,18 @@
 ---
 work_package_id: WP01
 title: Coupon Domain Entity & Zod Schema
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 84d3d78078673cd3bfc40ce8a8f74a8abc6aa65f
+created_at: '2026-03-09T13:45:26.557704+00:00'
 subtasks: [T001, T002, T003, T004]
 requirement_refs:
 - FR-1
 - FR-4
 - FR-5
 requirements: [FR-1, FR-4, FR-5]
+shell_pid: "15354"
 ---
 
 # Objective
