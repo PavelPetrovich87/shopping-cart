@@ -12,6 +12,7 @@ subtasks:
 - T006
 phase: Phase 2 - Interface Contracts
 shell_pid: "18013"
+agent: "gemini-cli"
 history:
 - timestamp: '2026-03-09T13:54:00Z'
   lane: planned
@@ -76,3 +77,4 @@ requirements:
 ## Activity Log
 
 - 2026-03-09T13:54:00Z -- system -- lane=planned -- Prompt generated via /spec-kitty.tasks
+- 2026-03-09T13:55:09Z – gemini-cli – shell_pid=18013 – lane=doing – Assigned agent via workflow command
