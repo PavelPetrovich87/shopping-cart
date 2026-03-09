@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { Money } from '@/shared/domain/Money';
 
 export const CouponType = {
   FLAT: 'FLAT',
@@ -79,5 +80,27 @@ export class Coupon {
    */
   public isValid(currentDate: Date): boolean {
     return this.validate({ currentDate }).isValid;
+  }
+
+  /**
+   * Calculates the discount amount for a given subtotal.
+   * Ensures the discount never exceeds the subtotal.
+   */
+  public calculateDiscount(subtotal: Money): Money {
+    let discountAmount: Money;
+
+    if (this.props.discountType === CouponType.FLAT) {
+      discountAmount = Money.fromCents(this.props.discountValue);
+    } else {
+      // PERCENTAGE: discountValue is a number between 1 and 100 (e.g., 10 for 10%)
+      discountAmount = subtotal.multiply(this.props.discountValue / 100);
+    }
+
+    // Cap the discount at the subtotal to prevent negative totals
+    if (discountAmount.rawCents > subtotal.rawCents) {
+      return subtotal;
+    }
+
+    return discountAmount;
   }
 }
