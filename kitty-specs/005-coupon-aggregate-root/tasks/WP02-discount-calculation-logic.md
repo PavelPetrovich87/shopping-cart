@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Discount Calculation Logic
-lane: "doing"
+lane: "done"
 dependencies: [WP01]
 base_branch: 005-coupon-aggregate-root-WP01
 base_commit: 8901e797b86224fc21cd141349770dbd40096b43
@@ -12,6 +12,8 @@ requirement_refs:
 - FR-3
 requirements: [FR-2, FR-3]
 shell_pid: "19573"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # Objective
@@ -53,3 +55,7 @@ Discounts can be either a flat amount or a percentage of the subtotal. The subto
 - Verify the math for percentage calculations handles edge cases (rounding).
 - Ensure the subtotal cap is correctly implemented for both discount types.
 - Check that `Money` instances are always used for financial amounts.
+
+## Activity Log
+
+- 2026-03-09T14:03:37Z – unknown – shell_pid=19573 – lane=done – WP02 implemented: Discount calculation logic with flat/percentage support and subtotal cap
