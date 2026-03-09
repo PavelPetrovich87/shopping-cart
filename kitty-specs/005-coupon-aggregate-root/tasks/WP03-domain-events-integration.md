@@ -1,12 +1,16 @@
 ---
 work_package_id: WP03
 title: Domain Events Integration
-lane: planned
+lane: "doing"
 dependencies: [WP02]
+base_branch: 005-coupon-aggregate-root-WP02
+base_commit: abe8e80b9311664d95cb46d741ddaa472810dfb4
+created_at: '2026-03-09T14:04:02.719165+00:00'
 subtasks: [T009, T010, T011, T012]
 requirement_refs:
 - FR-6
 requirements: [FR-6]
+shell_pid: "20153"
 ---
 
 # Objective
