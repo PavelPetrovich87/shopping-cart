@@ -39,6 +39,6 @@
 **Test Criteria**: `version` increments on every state change; Base price uses `Money` VO correctly.
 **Requirements**: FR-001, FR-002
 
-- [ ] T007 Implement Optimistic Locking with `version` field [FR-001]
-- [ ] T008 Implement base price management using `Money` VO [FR-002]
-- [ ] T009 Comprehensive Unit Tests [FR-001, FR-002, FR-003, FR-004, FR-005]
+- [x] T007 Implement Optimistic Locking with `version` field [FR-001]
+- [x] T008 Implement base price management using `Money` VO [FR-002]
+- [x] T009 Comprehensive Unit Tests [FR-001, FR-002, FR-003, FR-004, FR-005]
