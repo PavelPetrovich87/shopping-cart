@@ -1,11 +1,15 @@
 ---
 work_package_id: WP04
 title: Coupon Repository Port
-lane: planned
+lane: "doing"
 dependencies: [WP01]
+base_branch: 005-coupon-aggregate-root-WP01
+base_commit: 8901e797b86224fc21cd141349770dbd40096b43
+created_at: '2026-03-09T14:05:25.847213+00:00'
 subtasks: [T013, T014, T015]
 requirement_refs:
 - FR-1
+shell_pid: "20566"
 ---
 
 # Objective
