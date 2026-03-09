@@ -1,9 +1,10 @@
 {
   "feature_number": "007",
-  "slug": "007-product-variant-inventory-management",
-  "feature_slug": "007-product-variant-inventory-management",
-  "friendly_name": "product variant inventory management",
+  "slug": "product-variant-inventory-management",
+  "friendly_name": "ProductVariant Inventory Management",
   "mission": "software-dev",
+  "source_description": "T-007 ProductVariant here @TICKETS.md",
+  "created_at": "2026-03-09T13:26:08Z",
   "target_branch": "main",
-  "created_at": "2026-03-09T13:26:07.754445+00:00"
+  "vcs": "git"
 }
