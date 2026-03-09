@@ -19,9 +19,9 @@
 **Prompt**: `/kitty-specs/006-cart-driven-port-interfaces/tasks/WP01-shared-domain-results.md`
 
 ### Included Subtasks
-- [ ] T001 Create `src/shared/domain/Result.ts` with the generic `Result<T, E>` type [FR-02, FR-03]
-- [ ] T002 Create `src/features/cart/domain/StockResult.ts` for Inventory context outcomes [FR-02]
-- [ ] T003 Create `src/features/cart/domain/PricingResults.ts` for Pricing context outcomes [FR-03]
+- [x] T001 Create `src/shared/domain/Result.ts` with the generic `Result<T, E>` type [FR-02, FR-03]
+- [x] T002 Create `src/features/cart/domain/StockResult.ts` for Inventory context outcomes [FR-02]
+- [x] T003 Create `src/features/cart/domain/PricingResults.ts` for Pricing context outcomes [FR-03]
 
 ### Implementation Notes
 - Follow the `data-model.md` and `research.md` for exact type structures and error codes.
