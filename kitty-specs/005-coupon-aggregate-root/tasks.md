@@ -22,10 +22,10 @@
 - **Dependencies**: WP01
 - **Test Criteria**: Unit tests for all discount scenarios, including caps.
 - **Subtasks**:
-  - [ ] **T005**: Implement `calculateDiscount(subtotal: Money)` for `FLAT` type. [P]
-  - [ ] **T006**: Implement `calculateDiscount(subtotal: Money)` for `PERCENTAGE` type. [P]
-  - [ ] **T007**: Add logic to cap discounts at the subtotal (prevent negative totals).
-  - [ ] **T008**: Ensure `Money` value object is correctly integrated for all calculations.
+  - [x] **T005**: Implement `calculateDiscount(subtotal: Money)` for `FLAT` type. [P]
+  - [x] **T006**: Implement `calculateDiscount(subtotal: Money)` for `PERCENTAGE` type. [P]
+  - [x] **T007**: Add logic to cap discounts at the subtotal (prevent negative totals).
+  - [x] **T008**: Ensure `Money` value object is correctly integrated for all calculations.
 - **Implementation Sketch**: Leverage the `Money` VO for arithmetic. Ensure the percentage calculation handles rounding correctly via `Money` methods.
 - **Estimated Prompt Size**: ~400 lines
 
