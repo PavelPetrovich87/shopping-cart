@@ -1,13 +1,17 @@
 ---
 work_package_id: WP02
 title: Cart Application Ports
-lane: planned
+lane: "doing"
 dependencies: [WP01]
+base_branch: 006-cart-driven-port-interfaces-WP01
+base_commit: fbbee41e35a176368a6871d59f1add5bd3642b49
+created_at: '2026-03-09T13:55:08.787588+00:00'
 subtasks:
 - T004
 - T005
 - T006
 phase: Phase 2 - Interface Contracts
+shell_pid: "18013"
 history:
 - timestamp: '2026-03-09T13:54:00Z'
   lane: planned
