@@ -12,6 +12,7 @@ requirement_refs:
 - FR-002
 requirements: [FR-001, FR-002]
 shell_pid: "17752"
+agent: "Gemini"
 ---
 
 # WP03: Invariants, Concurrency & Final Validation
@@ -60,3 +61,7 @@ As an Aggregate Root, `ProductVariant` must maintain consistency during concurre
 ```bash
 spec-kitty implement WP03 --base WP02
 ```
+
+## Activity Log
+
+- 2026-03-09T13:54:35Z – Gemini – shell_pid=17752 – lane=doing – Assigned agent via workflow command
