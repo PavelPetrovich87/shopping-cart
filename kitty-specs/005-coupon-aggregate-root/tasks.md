@@ -38,10 +38,10 @@
 - **Dependencies**: WP02
 - **Test Criteria**: Verify that the correct events are returned from domain methods.
 - **Subtasks**:
-  - [ ] **T009**: Define `CouponValidated`, `CouponValidationFailed`, and `DiscountCalculated` event types. [P]
-  - [ ] **T010**: Update `validate()` to return `CouponValidated` or `CouponValidationFailed`.
-  - [ ] **T011**: Update `calculateDiscount()` to return `DiscountCalculated` with the amount.
-  - [ ] **T012**: Ensure events follow the project's `DomainEvent` base structure.
+  - [x] **T009**: Define `CouponValidated`, `CouponValidationFailed`, and `DiscountCalculated` event types. [P]
+  - [x] **T010**: Update `validate()` to return `CouponValidated` or `CouponValidationFailed`.
+  - [x] **T011**: Update `calculateDiscount()` to return `DiscountCalculated` with the amount.
+  - [x] **T012**: Ensure events follow the project's `DomainEvent` base structure.
 - **Implementation Sketch**: Modify method signatures to return `{ result, events }` as per the project constitution.
 - **Estimated Prompt Size**: ~380 lines
 
