@@ -8,10 +8,10 @@
 - **Priority**: High
 - **Test Criteria**: Unit tests for instantiation and validation rules.
 - **Subtasks**:
-  - [ ] **T001**: Define `Coupon` properties and `discountType` enum using Zod. [P]
-  - [ ] **T002**: Implement `Coupon` class with static factory `create` method.
-  - [ ] **T003**: Add internal validation logic for `Active`/`Inactive` and `expirationDate`.
-  - [ ] **T004**: Implement basic `isValid()` method.
+  - [x] **T001**: Define `Coupon` properties and `discountType` enum using Zod. [P]
+  - [x] **T002**: Implement `Coupon` class with static factory `create` method.
+  - [x] **T003**: Add internal validation logic for `Active`/`Inactive` and `expirationDate`.
+  - [x] **T004**: Implement basic `isValid()` method.
 - **Implementation Sketch**: Start with the Zod schema to enforce invariants, then build the class around it.
 - **Estimated Prompt Size**: ~350 lines
 
