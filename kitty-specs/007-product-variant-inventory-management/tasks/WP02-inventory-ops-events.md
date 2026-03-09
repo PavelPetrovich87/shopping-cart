@@ -12,6 +12,7 @@ requirement_refs:
 - FR-005
 requirements: [FR-004, FR-005]
 shell_pid: "16798"
+agent: "Gemini"
 ---
 
 # WP02: Core Inventory Operations & Events
@@ -65,3 +66,7 @@ Inventory management relies on strict transitions: stock is first **reserved**, 
 ```bash
 spec-kitty implement WP02 --base WP01
 ```
+
+## Activity Log
+
+- 2026-03-09T13:52:24Z – Gemini – shell_pid=16798 – lane=doing – Assigned agent via workflow command
