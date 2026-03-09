@@ -1,13 +1,17 @@
 ---
 work_package_id: WP02
 title: Discount Calculation Logic
-lane: planned
+lane: "doing"
 dependencies: [WP01]
+base_branch: 005-coupon-aggregate-root-WP01
+base_commit: 8901e797b86224fc21cd141349770dbd40096b43
+created_at: '2026-03-09T14:01:26.102320+00:00'
 subtasks: [T005, T006, T007, T008]
 requirement_refs:
 - FR-2
 - FR-3
 requirements: [FR-2, FR-3]
+shell_pid: "19573"
 ---
 
 # Objective
