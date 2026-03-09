@@ -1,108 +1,54 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: Cart Driven Port Interfaces
 
-
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
-
-## Summary
-
-[Extract from feature spec: primary requirement + technical approach from research]
+**Feature**: 006-cart-driven-port-interfaces
+**Mission**: software-dev
+**Status**: Planned
+**Target Branch**: `main`
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+- **Framework**: React (TypeScript)
+- **State Management**: Zustand (for the repository implementation, though only the port is defined here)
+- **Architecture**: Hexagonal (Driven Ports in Application Layer)
+- **Error Handling Strategy**: Discriminated Union `Result` pattern in the Domain Layer.
+- **Port Types**:
+    - `ICartRepository`: Synchronous (Zustand-compatible), ID-based lookups.
+    - `IInventoryService`: Asynchronous, `Result`-based stock validation.
+    - `IPricingService`: Asynchronous, `Result`-based coupon validation and discount calculation.
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+- [x] DDD best practices followed (Ports in Application, Results in Domain).
+- [x] Hexagonal Architecture principles applied (Inversion of Control via ports).
+- [x] TypeScript strict typing for all interfaces.
 
-[Gates determined based on constitution file]
+## Gates
 
-## Project Structure
+- [x] Specification confirmed (006-cart-driven-port-interfaces/spec.md).
+- [x] Technical context aligned with the user.
+- [x] Dependencies (T-001, T-004) acknowledged.
 
-### Documentation (this feature)
+## Phase 0: Outline & Research
 
-```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
-```
+1. **Research Task 1: Generic Result Wrapper Implementation**
+   - Goal: Define the optimal structure for `Result<T, E>` in `src/shared/domain/Result.ts`.
+   - Action: Research standard functional patterns for discriminated unions in TypeScript to ensure type safety and developer ergonomics.
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+2. **Research Task 2: Domain Result Definitions**
+   - Goal: Identify specific error codes for `StockResult`, `CouponResult`, and `MoneyResult`.
+   - Action: Analyze `T-008` and `T-010` requirements to preemptively define all necessary domain outcomes (e.g., `OUT_OF_STOCK`, `COUPON_EXPIRED`, `INVALID_CODE`).
 
-```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+## Phase 1: Design & Contracts
 
-tests/
-├── contract/
-├── integration/
-└── unit/
+1. **Entity Design (`data-model.md`)**:
+   - Define the `Result` wrapper structure.
+   - Define feature-specific domain result types.
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+2. **Port Definitions (`/contracts/`)**:
+   - Create Markdown representations of `ICartRepository.ts.md`, `IInventoryService.ts.md`, and `IPricingService.ts.md` to serve as source-of-truth contracts.
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+3. **Validation Scenarios (`quickstart.md`)**:
+   - Define how use cases will interact with these ports to ensure the contracts are ergonomic and meet all functional requirements.
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
-```
-
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
-
-## Complexity Tracking
-
-*Fill ONLY if Constitution Check has violations that must be justified*
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+4. **Agent Context Update**:
+   - Update agent-specific context files with the new `Result` pattern conventions.
