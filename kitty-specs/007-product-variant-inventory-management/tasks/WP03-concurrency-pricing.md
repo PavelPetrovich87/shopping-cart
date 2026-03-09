@@ -1,13 +1,17 @@
 ---
 work_package_id: WP03
 title: Invariants, Concurrency & Final Validation
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 453860abc247688a593292703cc63c708fc5d95c
+created_at: '2026-03-09T13:54:35.257751+00:00'
 subtasks: [T007, T008, T009]
 requirement_refs:
 - FR-001
 - FR-002
 requirements: [FR-001, FR-002]
+shell_pid: "17752"
 ---
 
 # WP03: Invariants, Concurrency & Final Validation
