@@ -52,8 +52,8 @@
 - **Dependencies**: WP01
 - **Test Criteria**: N/A (Interface definition).
 - **Subtasks**:
-  - [ ] **T013**: Create `ICouponRepository` interface. [P]
-  - [ ] **T014**: Define `CouponNotFoundError` and `InvalidCouponDataError`. [P]
-  - [ ] **T015**: Add `findByCode`, `save`, and `findAll` methods to the interface.
+  - [x] **T013**: Create `ICouponRepository` interface. [P]
+  - [x] **T014**: Define `CouponNotFoundError` and `InvalidCouponDataError`. [P]
+  - [x] **T015**: Add `findByCode`, `save`, and `findAll` methods to the interface.
 - **Implementation Sketch**: Place the interface in the domain/ports layer. Ensure it only references domain entities.
 - **Estimated Prompt Size**: ~300 lines
