@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Coupon Domain Entity & Zod Schema
-lane: "doing"
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: 84d3d78078673cd3bfc40ce8a8f74a8abc6aa65f
@@ -13,6 +13,8 @@ requirement_refs:
 - FR-5
 requirements: [FR-1, FR-4, FR-5]
 shell_pid: "15354"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # Objective
@@ -62,3 +64,7 @@ The project uses DDD and Hexagonal Architecture. The `Coupon` aggregate root mus
 - Ensure Zod schema is strictly defined and reflects the domain requirements.
 - Verify the class is pure and does not leak infrastructure details.
 - Check that the factory method is the only way to create instances.
+
+## Activity Log
+
+- 2026-03-09T14:01:07Z – unknown – shell_pid=15354 – lane=done – WP01 implemented: Coupon aggregate root with Zod validation and basic lifecycle
