@@ -1,13 +1,17 @@
 ---
 work_package_id: WP02
 title: Core Inventory Operations & Events
-lane: planned
+lane: "doing"
 dependencies: []
+base_branch: main
+base_commit: 52891743b6631ed1f14bd86405c811e4e3992525
+created_at: '2026-03-09T13:52:23.239741+00:00'
 subtasks: [T004, T005, T006, T010]
 requirement_refs:
 - FR-004
 - FR-005
 requirements: [FR-004, FR-005]
+shell_pid: "16798"
 ---
 
 # WP02: Core Inventory Operations & Events
