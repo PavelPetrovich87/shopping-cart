@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: Coupon Repository Port
-lane: "doing"
+lane: "done"
 dependencies: [WP01]
 base_branch: 005-coupon-aggregate-root-WP01
 base_commit: 8901e797b86224fc21cd141349770dbd40096b43
@@ -10,6 +10,8 @@ subtasks: [T013, T014, T015]
 requirement_refs:
 - FR-1
 shell_pid: "20566"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # Objective
@@ -54,3 +56,7 @@ In Hexagonal Architecture, ports define the contract that adapters must fulfill.
 ---
 To implement this work package, run:
 `spec-kitty implement WP04 --base WP01`
+
+## Activity Log
+
+- 2026-03-09T14:06:23Z – unknown – shell_pid=20566 – lane=done – WP04 implemented: ICouponRepository port and domain errors
