@@ -1,0 +1,128 @@
+import { z } from 'zod';
+import { Money } from '@/shared/domain/Money';
+import { DomainEvent } from '@/shared/events/DomainEvent';
+import { 
+  createCouponValidatedEvent, 
+  createCouponValidationFailedEvent, 
+  createDiscountCalculatedEvent 
+} from './events/CouponEvents';
+
+export const CouponType = {
+  FLAT: 'FLAT',
+  PERCENTAGE: 'PERCENTAGE',
+} as const;
+
+export type CouponType = (typeof CouponType)[keyof typeof CouponType];
+
+export const CouponStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+} as const;
+
+export type CouponStatus = (typeof CouponStatus)[keyof typeof CouponStatus];
+
+export const CouponSchema = z.object({
+  code: z.string().min(1).regex(/^[a-zA-Z0-9]+$/),
+  discountType: z.nativeEnum(CouponType),
+  discountValue: z.number().positive(),
+  status: z.nativeEnum(CouponStatus).default(CouponStatus.ACTIVE),
+  expirationDate: z.date().optional(),
+}).refine((data) => {
+  if (data.discountType === CouponType.PERCENTAGE) {
+    return data.discountValue >= 1 && data.discountValue <= 100;
+  }
+  return true;
+}, {
+  message: "Percentage discount must be between 1 and 100",
+  path: ["discountValue"],
+});
+
+export type CouponProps = z.infer<typeof CouponSchema>;
+export type CouponInput = z.input<typeof CouponSchema>;
+
+/**
+ * Coupon Aggregate Root
+ * Encapsulates promotional code business logic and lifecycle rules.
+ */
+export class Coupon {
+  private readonly props: CouponProps;
+
+  private constructor(props: CouponProps) {
+    this.props = props;
+  }
+
+  /**
+   * Factory method: Create a new Coupon instance after validating input.
+   */
+  public static create(input: CouponInput): Coupon {
+    const validatedProps = CouponSchema.parse(input);
+    return new Coupon(validatedProps);
+  }
+
+  // Getters for individual properties
+  public get code(): string { return this.props.code; }
+  public get discountType(): CouponType { return this.props.discountType; }
+  public get discountValue(): number { return this.props.discountValue; }
+  public get status(): CouponStatus { return this.props.status; }
+  public get expirationDate(): Date | undefined { return this.props.expirationDate; }
+
+  /**
+   * Internal validation logic for status and expiration.
+   */
+  public validate(context: { currentDate: Date }): { isValid: boolean; error?: string; events: DomainEvent[] } {
+    if (this.props.status === CouponStatus.INACTIVE) {
+      const error = 'Sorry, but this coupon is inactive';
+      return { 
+        isValid: false, 
+        error, 
+        events: [createCouponValidationFailedEvent(this.props.code, error)] 
+      };
+    }
+
+    if (this.props.expirationDate && context.currentDate > this.props.expirationDate) {
+      const error = 'Sorry, but this coupon has expired';
+      return { 
+        isValid: false, 
+        error, 
+        events: [createCouponValidationFailedEvent(this.props.code, error)] 
+      };
+    }
+
+    return { 
+      isValid: true, 
+      events: [createCouponValidatedEvent(this.props.code)] 
+    };
+  }
+
+  /**
+   * Helper to quickly check validity.
+   */
+  public isValid(currentDate: Date): boolean {
+    return this.validate({ currentDate }).isValid;
+  }
+
+  /**
+   * Calculates the discount amount for a given subtotal.
+   * Ensures the discount never exceeds the subtotal.
+   */
+  public calculateDiscount(subtotal: Money): { discount: Money; events: DomainEvent[] } {
+    let discountAmount: Money;
+
+    if (this.props.discountType === CouponType.FLAT) {
+      discountAmount = Money.fromCents(this.props.discountValue);
+    } else {
+      // PERCENTAGE: discountValue is a number between 1 and 100 (e.g., 10 for 10%)
+      discountAmount = subtotal.multiply(this.props.discountValue / 100);
+    }
+
+    // Cap the discount at the subtotal to prevent negative totals
+    if (discountAmount.rawCents > subtotal.rawCents) {
+      discountAmount = subtotal;
+    }
+
+    return {
+      discount: discountAmount,
+      events: [createDiscountCalculatedEvent(this.props.code, subtotal, discountAmount)]
+    };
+  }
+}
