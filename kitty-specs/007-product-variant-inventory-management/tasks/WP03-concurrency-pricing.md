@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Invariants, Concurrency & Final Validation
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: 453860abc247688a593292703cc63c708fc5d95c
@@ -11,8 +11,8 @@ requirement_refs:
 - FR-001
 - FR-002
 requirements: [FR-001, FR-002]
-shell_pid: "17752"
-agent: "Gemini"
+shell_pid: "29954"
+agent: "antigravity"
 ---
 
 # WP03: Invariants, Concurrency & Final Validation
@@ -66,3 +66,4 @@ spec-kitty implement WP03 --base WP02
 
 - 2026-03-09T13:54:35Z – Gemini – shell_pid=17752 – lane=doing – Assigned agent via workflow command
 - 2026-03-09T13:55:28Z – Gemini – shell_pid=17752 – lane=for_review – Implemented optimistic locking (version) and integrated Money VO for basePrice. Added comprehensive unit tests.
+- 2026-03-10T07:42:35Z – antigravity – shell_pid=29954 – lane=doing – Started review via workflow command
