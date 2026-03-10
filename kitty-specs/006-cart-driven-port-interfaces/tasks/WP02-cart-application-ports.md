@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Cart Application Ports
-lane: "doing"
+lane: "for_review"
 dependencies: [WP01]
 base_branch: 006-cart-driven-port-interfaces-WP01
 base_commit: fbbee41e35a176368a6871d59f1add5bd3642b49
@@ -102,3 +102,4 @@ Your dependency (WP01) has been rejected and sent back to `planned` because it i
 - 2026-03-10T08:11:05Z – antigravity – shell_pid=41219 – lane=doing – Started review via workflow command
 - 2026-03-10T08:14:40Z – antigravity – shell_pid=41219 – lane=planned – Moved to planned
 - 2026-03-10T08:43:43Z – gemini-cli – shell_pid=44496 – lane=doing – Started implementation via workflow command
+- 2026-03-10T08:44:27Z – gemini-cli – shell_pid=44496 – lane=for_review – FIXED: Rebased onto cleaned WP01 branch and removed all accidental deletions/modifications.
