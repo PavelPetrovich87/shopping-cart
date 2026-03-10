@@ -46,8 +46,10 @@ This constitution captures the technical standards, code quality expectations, t
 1. **NO UNAUTHORIZED CREATION**: The AI must **NEVER** create architecture, folder structures, naming conventions, or file structures without an explicit, direct command from the user.
 2. **DISCUSSION FIRST**: All architectural and structural decisions must be discussed first. The AI should act as a consultant and sounding board.
 3. **WAIT FOR SPECIFICATIONS**: The user will create specifications after the discussion phase.
-4. **IMPLEMENT COMMAND**: Only after specifications are finalized AND the user gives a direct command to implement, can the AI write the code.
-5. **ASK QUESTIONS**: The AI should proactively ask questions to clarify intent rather than making assumptions.
+4. **NO PROACTIVE PLANNING/SPECIFYING**: The AI must **NEVER** create specifications (`spec.md`), implementation plans (`plan.md`), research artifacts (`research.md`), or data models (`data-model.md`) without an explicit, direct command from the user for that specific feature.
+5. **IMPLEMENT COMMAND**: Only after specifications are finalized AND the user gives a direct command to implement, can the AI write the code.
+6. **ASK QUESTIONS**: The AI should proactively ask questions to clarify intent rather than making assumptions.
+7. **MANDATORY REVIEW**: Upon completing the implementation of a work package, the AI must move the task to the `for_review` lane and **STOP**. It must not move a task to the `done` lane or proceed to the next task until the user has reviewed the changes and provided explicit approval.
 
 ### Domain-Driven Design Context Loading
 1. **READ BEFORE PLANNING:** When using `/spec-kitty.specify` or `/spec-kitty.plan` to scaffold a feature, you MUST identify the relevant Bounded Context.

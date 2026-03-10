@@ -43,7 +43,7 @@
 
 ---
 
-### T-003: Shared Fixtures from `data/`
+### T-003: Shared Fixtures from `data/` ✅
 | Field | Value |
 |---|---|
 | **Context** | `shared` |
@@ -53,16 +53,16 @@
 **Description**: Create `src/shared/fixtures/` by importing and re-exporting typed data from the existing `data/` folder (`products.json`, `inventory.json`, `coupons.json`, `sample-cart.json`, `product-images.json`). Provide TypeScript types for each JSON shape.
 
 **Acceptance Criteria**:
-- [ ] Each JSON file has a corresponding TypeScript interface (e.g., `InventoryRecord`, `CouponRecord`)
-- [ ] Data is importable via `import { inventoryData } from '@/shared/fixtures'`
-- [ ] Types match the actual JSON shape (validated by TS compiler, no `any`)
+- [x] Each JSON file has a corresponding TypeScript interface (e.g., `InventoryRecord`, `CouponRecord`)
+- [x] Data is importable via `import { inventoryData } from '@/shared/fixtures'`
+- [x] Types match the actual JSON shape (validated by TS compiler, no `any`)
 
 ---
 
 ## Tier 2 — Domain Entities
 *Core business logic depending only on Tier 1.*
 
-### T-004: Cart Aggregate Root & `CartItem` Entity
+### T-004: Cart Aggregate Root & `CartItem` Entity ✅
 | Field | Value |
 |---|---|
 | **Context** | 🛍️ Cart |
@@ -72,13 +72,13 @@
 **Description**: Implement `Cart.ts` (Aggregate Root) and `CartItem.ts` (Entity). The Cart manages an internal collection of `CartItem`s keyed by `skuId`. Enforce invariants: quantity ≥ 1, multiple coupons allowed. Cart has lifecycle states: `Active` → `Checkout_Pending` → `Checked_Out`. Subtotal is computed from `CartItem` prices using `Money`.
 
 **Acceptance Criteria**:
-- [ ] `cart.addItem(item)` adds or increments quantity
-- [ ] `cart.removeItem(skuId)` removes an item
-- [ ] `cart.changeQuantity(skuId, qty)` enforces qty ≥ 1
-- [ ] `cart.subtotal` returns a `Money` value
-- [ ] State transitions: `initiateCheckout()` → `Checkout_Pending`, `markCheckedOut()` → `Checked_Out`
-- [ ] Domain events emitted: `ItemAddedToCart`, `CartItemQuantityChanged`, `ItemRemovedFromCart`, `CartCleared`
-- [ ] Unit tests for all invariants and state transitions
+- [x] `cart.addItem(item)` adds or increments quantity
+- [x] `cart.removeItem(skuId)` removes an item
+- [x] `cart.changeQuantity(skuId, qty)` enforces qty ≥ 1
+- [x] `cart.subtotal` returns a `Money` value
+- [x] State transitions: `initiateCheckout()` → `Checkout_Pending`, `markCheckedOut()` → `Checked_Out`
+- [x] Domain events emitted: `ItemAddedToCart`, `CartItemQuantityChanged`, `ItemRemovedFromCart`, `CartCleared`
+- [x] Unit tests for all invariants and state transitions
 
 ---
 
