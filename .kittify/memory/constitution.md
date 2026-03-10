@@ -55,6 +55,9 @@ This constitution captures the technical standards, code quality expectations, t
 1. **READ BEFORE PLANNING:** When using `/spec-kitty.specify` or `/spec-kitty.plan` to scaffold a feature, you MUST identify the relevant Bounded Context.
 2. **LOAD DOMAIN MEMORY:** You MUST read the corresponding `.kittify/memory/domains/<context>.md` file (if it exists) BEFORE generating the specification or plan. This ensures feature specs inherit the established Domain invariants, entities, and ports.
 
+### Spec Kitty Workflow Rules
+1. **EXPLICIT WORK PACKAGE DEPENDENCIES:** When generating or planning tasks (`tasks.md` and `WP*.md` files), any work package that builds upon or requires code from a previous work package MUST explicitly declare its dependency in the YAML frontmatter (e.g., `dependencies: ["WP01"]`). This ensures Spec Kitty linearly chains Git branching and prevents `add/add` merge conflicts caused by parallel file recreations.
+
 ### Code Review and Merges
 - Manual inspection to ensure design fidelity matching provided visual references (font sizing, weight, alignment).
 
