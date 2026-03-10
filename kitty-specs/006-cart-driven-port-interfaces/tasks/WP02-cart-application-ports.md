@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Cart Application Ports
-lane: "doing"
+lane: "planned"
 dependencies: [WP01]
 base_branch: 006-cart-driven-port-interfaces-WP01
 base_commit: fbbee41e35a176368a6871d59f1add5bd3642b49
@@ -13,6 +13,9 @@ subtasks:
 phase: Phase 2 - Interface Contracts
 shell_pid: "41219"
 agent: "antigravity"
+review_status: "has_feedback"
+reviewed_by: "PavelPetrovich87"
+review_feedback_file: "/private/var/folders/zr/vdfx43852vd35jqx5vv0j0qh0000gn/T/spec-kitty-review-feedback-WP02.md"
 history:
 - timestamp: '2026-03-09T13:54:00Z'
   lane: planned
@@ -74,9 +77,27 @@ requirements:
 - Verify that `IInventoryService` and `IPricingService` methods return `Promise<Result<...>>`.
 - Ensure no infrastructure-level types (e.g., HTTP responses, database models) leak into these interfaces.
 
+## Review Feedback
+
+**Reviewed by**: PavelPetrovich87
+**Status**: ❌ Changes Requested
+**Date**: 2026-03-10
+**Feedback file**: `/private/var/folders/zr/vdfx43852vd35jqx5vv0j0qh0000gn/T/spec-kitty-review-feedback-WP02.md`
+
+**Issue 1: Unresolved Dependency and Required Rebase**
+Your dependency (WP01) has been rejected and sent back to `planned` because it inadvertently deleted several unrelated files across the project. 
+
+**How to fix:**
+1. Please wait for the agent assigned to WP01 to fix and merge their work.
+2. Once WP01 is successfully merged to `main`, you MUST rebase your branch onto `main` to remove the incorrect file deletions from your history.
+   Run: `git fetch origin main && git rebase origin/main` (or just `git rebase main` if you have it locally)
+3. After rebasing and verifying your ports code is correct, you can transition back to for_review.
+
+
 ## Activity Log
 
 - 2026-03-09T13:54:00Z -- system -- lane=planned -- Prompt generated via /spec-kitty.tasks
 - 2026-03-09T13:55:09Z – gemini-cli – shell_pid=18013 – lane=doing – Assigned agent via workflow command
 - 2026-03-09T13:55:44Z – gemini-cli – shell_pid=18013 – lane=for_review – Implemented driven port interfaces (ICartRepository, IInventoryService, IPricingService) in the application layer.
 - 2026-03-10T08:11:05Z – antigravity – shell_pid=41219 – lane=doing – Started review via workflow command
+- 2026-03-10T08:14:40Z – antigravity – shell_pid=41219 – lane=planned – Moved to planned
