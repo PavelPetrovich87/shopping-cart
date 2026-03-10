@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Core Inventory Operations & Events
-lane: "doing"
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: 52891743b6631ed1f14bd86405c811e4e3992525
@@ -13,6 +13,8 @@ requirement_refs:
 requirements: [FR-004, FR-005]
 shell_pid: "29954"
 agent: "antigravity"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # WP02: Core Inventory Operations & Events
@@ -72,3 +74,4 @@ spec-kitty implement WP02 --base WP01
 - 2026-03-09T13:52:24Z – Gemini – shell_pid=16798 – lane=doing – Assigned agent via workflow command
 - 2026-03-09T13:53:43Z – Gemini – shell_pid=16798 – lane=for_review – Implemented reserve, releaseReservation, confirmDepletion and domain event emission. All tests pass.
 - 2026-03-10T07:41:17Z – antigravity – shell_pid=29954 – lane=doing – Started review via workflow command
+- 2026-03-10T07:42:17Z – antigravity – shell_pid=29954 – lane=done – Review passed: reserve(), releaseReservation(), and confirmDepletion() correctly implement FR-004 and FR-005. Domain events (StockReserved, StockDepleted, StockReleased) properly typed and emitted. All 10 tests pass. Idempotent release behavior is correct.
