@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Shared Domain Results
-lane: "doing"
+lane: "planned"
 dependencies: []
 base_branch: main
 base_commit: 4a9afa3bc08332cfb15d03bbbcf1e7db48493dbf
@@ -13,6 +13,9 @@ subtasks:
 phase: Phase 1 - Foundational Domain
 shell_pid: "41219"
 agent: "antigravity"
+review_status: "has_feedback"
+reviewed_by: "PavelPetrovich87"
+review_feedback_file: "/private/var/folders/zr/vdfx43852vd35jqx5vv0j0qh0000gn/T/spec-kitty-review-feedback-WP01.md"
 history:
 - timestamp: '2026-03-09T13:52:00Z'
   lane: planned
@@ -78,9 +81,31 @@ requirements:
 - Verify error codes match the `data-model.md` exactly.
 - Ensure no runtime dependencies are added; keep it as pure TypeScript types/interfaces where possible.
 
+## Review Feedback
+
+**Reviewed by**: PavelPetrovich87
+**Status**: ❌ Changes Requested
+**Date**: 2026-03-10
+**Feedback file**: `/private/var/folders/zr/vdfx43852vd35jqx5vv0j0qh0000gn/T/spec-kitty-review-feedback-WP01.md`
+
+**Issue 1: Unrelated file modifications and deletions.**
+You have modified or deleted many files that are completely outside the scope of your WP. For instance, you deleted the entire `src/features/inventory/domain/` and `src/features/pricing/domain/` folders, and you modified many files in `kitty-specs/` and `package-lock.json`. 
+
+**How to fix:**
+1. Please undo your commit softly, or checkout `main` versions for the unrelated files:
+   `git checkout main -- src/features/inventory/ src/features/pricing/ kitty-specs/ .kittify/ TICKETS.md package-lock.json package.json`
+2. Ensure you have NO deleted files or unrelated modifications staged. Your `git status` should only show your 3 created files.
+3. Only keep and commit the 3 files you created:
+   - `src/shared/domain/Result.ts`
+   - `src/features/cart/domain/StockResult.ts`
+   - `src/features/cart/domain/PricingResults.ts`
+4. Re-commit (or `git commit --amend --no-edit` once the index is fixed).
+
+
 ## Activity Log
 
 - 2026-03-09T13:52:00Z -- system -- lane=planned -- Prompt generated via /spec-kitty.tasks
 - 2026-03-09T13:52:35Z – gemini-cli – shell_pid=17075 – lane=doing – Assigned agent via workflow command
 - 2026-03-09T13:53:54Z – gemini-cli – shell_pid=17075 – lane=for_review – Implemented shared Result wrapper, StockResult, and PricingResults for the Cart domain.
 - 2026-03-10T08:06:35Z – antigravity – shell_pid=41219 – lane=doing – Started review via workflow command
+- 2026-03-10T08:10:48Z – antigravity – shell_pid=41219 – lane=planned – Moved to planned
