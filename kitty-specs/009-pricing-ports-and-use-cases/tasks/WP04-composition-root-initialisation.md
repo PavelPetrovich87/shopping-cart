@@ -9,6 +9,7 @@ created_at: '2026-03-12T14:33:46.633571+00:00'
 subtasks: [T012, T013]
 requirement_refs: [FR-01, FR-02, FR-03]
 shell_pid: "78661"
+agent: "gemini-cli"
 ---
 
 # Work Package: WP04 - Composition Root and Context Initialisation
@@ -48,3 +49,7 @@ This work package wires the application logic (use cases) to the infrastructure 
 ## Reviewer Guidance
 Check for clear boundaries and minimal exposure of infrastructure details.
 Confirm that the repository instance is correctly shared across use cases within the context.
+
+## Activity Log
+
+- 2026-03-12T14:33:47Z – gemini-cli – shell_pid=78661 – lane=doing – Assigned agent via workflow command
