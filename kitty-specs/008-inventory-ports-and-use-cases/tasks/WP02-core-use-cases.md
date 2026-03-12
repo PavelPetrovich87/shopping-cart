@@ -1,4 +1,7 @@
 ---
+work_package_id: WP02
+title: Core Use Cases (Availability & Reservation)
+lane: "doing"
 dependencies: [WP01]
 base_branch: 008-inventory-ports-and-use-cases-WP01
 base_commit: 2074cdd18d118849472a299d49a783e0ae82c94f
@@ -9,8 +12,7 @@ name: Core Use Cases (Availability & Reservation)
 requirement-refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 requirement_refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 status: todo
-lane: "for_review"
-shell_pid: "73058"
+shell_pid: "75733"
 agent: "Gemini"
 ---
 
@@ -30,3 +32,4 @@ Implement the core use cases for checking stock availability and reserving stock
 
 - 2026-03-12T14:03:41Z – Gemini – shell_pid=73058 – lane=doing – Assigned agent via workflow command
 - 2026-03-12T14:05:44Z – Gemini – shell_pid=73058 – lane=for_review – Core use cases (CheckStockAvailability, ReserveStock) implemented with unit tests in .worktrees/008-inventory-ports-and-use-cases-WP02
+- 2026-03-12T14:24:02Z – Gemini – shell_pid=75733 – lane=doing – Started review via workflow command
