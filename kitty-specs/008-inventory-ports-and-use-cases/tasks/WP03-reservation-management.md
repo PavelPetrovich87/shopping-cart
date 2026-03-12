@@ -13,6 +13,7 @@ requirement-refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 requirement_refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 status: todo
 shell_pid: "75985"
+agent: "Gemini"
 ---
 
 ## Objective
@@ -26,3 +27,7 @@ Implement use cases for releasing reservations and confirming stock depletion.
 ## Verification
 - [ ] Unit tests for `ReleaseStockReservation` pass
 - [ ] Unit tests for `ConfirmStockDepletion` pass
+
+## Activity Log
+
+- 2026-03-12T14:24:41Z – Gemini – shell_pid=75985 – lane=doing – Assigned agent via workflow command
