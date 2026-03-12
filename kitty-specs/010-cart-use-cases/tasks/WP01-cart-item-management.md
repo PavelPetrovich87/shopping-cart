@@ -1,7 +1,7 @@
 ---
 work_package_id: WP01
 title: Cart Item Management
-lane: "doing"
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: ef1aee36f9171361d54510cdaf0e967d17d17f6e
@@ -10,6 +10,8 @@ subtasks: [T001, T002, T003, T004, T008]
 requirement_refs: [FR-001, FR-002, FR-003]
 shell_pid: "77259"
 agent: "gemini-cli"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # WP01: Cart Item Management
@@ -99,3 +101,4 @@ Create standalone functional handlers that orchestrate `Cart` domain logic and `
 - 2026-03-12T14:19:02Z – gemini-cli – shell_pid=74599 – lane=doing – Assigned agent via workflow command
 - 2026-03-12T14:28:30Z – gemini-cli – shell_pid=74599 – lane=for_review – Implemented AddItemToCart, RemoveItemFromCart, and ChangeCartItemQuantity use cases with 100% test coverage.
 - 2026-03-12T14:30:10Z – gemini-cli – shell_pid=77259 – lane=doing – Started review via workflow command
+- 2026-03-12T14:31:00Z – gemini-cli – shell_pid=77259 – lane=done – Review passed: Item mutation use cases (Add, Remove, ChangeQuantity) correctly implemented as standalone functional handlers with stock validation and full unit test coverage.
