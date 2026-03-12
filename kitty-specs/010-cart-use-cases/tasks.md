@@ -61,8 +61,8 @@
 - **Requirements**: FR-006
 - **Test Criteria**: Checkout transitions state to `Checkout_Pending` only if ALL items are in stock.
 - **Included Subtasks**:
-  - [ ] T007: Implement `InitiateCheckout` use case
-  - [ ] T010: Create unit tests for `InitiateCheckout`
+  - [x] T007: Implement `InitiateCheckout` use case
+  - [x] T010: Create unit tests for `InitiateCheckout`
 - **Implementation Sketch**:
   1. Iterate over all cart items and call `inventoryService.checkStockAvailability`.
   2. If any fail, return combined error.
