@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Reservation Management (Release & Depletion)
-lane: "for_review"
+lane: "doing"
 dependencies: [WP02]
 base_branch: 008-inventory-ports-and-use-cases-WP02
 base_commit: 62a89c737a2e57a456a7b3d1c4ddebb01bcbb832
@@ -12,7 +12,7 @@ name: Reservation Management (Release & Depletion)
 requirement-refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 requirement_refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 status: todo
-shell_pid: "75985"
+shell_pid: "76527"
 agent: "Gemini"
 ---
 
@@ -32,3 +32,4 @@ Implement use cases for releasing reservations and confirming stock depletion.
 
 - 2026-03-12T14:24:41Z – Gemini – shell_pid=75985 – lane=doing – Assigned agent via workflow command
 - 2026-03-12T14:25:32Z – Gemini – shell_pid=75985 – lane=for_review – Reservation management use cases (ReleaseStockReservation, ConfirmStockDepletion) implemented with unit tests in .worktrees/008-inventory-ports-and-use-cases-WP03
+- 2026-03-12T14:25:37Z – Gemini – shell_pid=76527 – lane=doing – Started review via workflow command
