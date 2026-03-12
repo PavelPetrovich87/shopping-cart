@@ -9,6 +9,7 @@ created_at: '2026-03-12T14:31:07.168211+00:00'
 subtasks: [T005, T006, T009]
 requirement_refs: [FR-004, FR-005]
 shell_pid: "77644"
+agent: "gemini-cli"
 ---
 
 # WP02: Coupon and Pricing
@@ -67,3 +68,7 @@ Enable shoppers to apply and remove promotional coupon codes with external valid
 
 ## Next Step
 `spec-kitty implement WP02 --base WP01`
+
+## Activity Log
+
+- 2026-03-12T14:31:07Z – gemini-cli – shell_pid=77644 – lane=doing – Assigned agent via workflow command
