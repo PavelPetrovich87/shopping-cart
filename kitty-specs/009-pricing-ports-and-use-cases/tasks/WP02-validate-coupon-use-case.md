@@ -9,6 +9,7 @@ created_at: '2026-03-12T14:19:30.828989+00:00'
 subtasks: [T006, T007, T008]
 requirement_refs: [FR-02]
 shell_pid: "74798"
+agent: "gemini-cli"
 ---
 
 # Work Package: WP02 - Validate Coupon Use Case
@@ -66,3 +67,7 @@ Check that the error messages match the feature specification exactly.
 - "Please enter a valid code" (empty/malformed)
 - "Sorry, but this coupon doesn't exist" (not found)
 - Ensure the factory pattern is used for dependency injection.
+
+## Activity Log
+
+- 2026-03-12T14:19:31Z – gemini-cli – shell_pid=74798 – lane=doing – Assigned agent via workflow command
