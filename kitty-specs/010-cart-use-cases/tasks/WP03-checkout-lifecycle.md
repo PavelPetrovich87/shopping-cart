@@ -1,10 +1,14 @@
 ---
-work_package_id: "WP03"
-title: "Checkout Lifecycle"
-lane: "planned"
-dependencies: ["WP01"]
-requirement_refs: ["FR-006"]
-subtasks: ["T007", "T010"]
+work_package_id: WP03
+title: Checkout Lifecycle
+lane: "doing"
+dependencies: [WP01]
+base_branch: 010-cart-use-cases-WP01
+base_commit: 57d9ffe3d7dd70db9988e899d3c2197889742bd4
+created_at: '2026-03-12T14:35:33.930171+00:00'
+subtasks: [T007, T010]
+requirement_refs: [FR-006]
+shell_pid: "79287"
 ---
 
 # WP03: Checkout Lifecycle
