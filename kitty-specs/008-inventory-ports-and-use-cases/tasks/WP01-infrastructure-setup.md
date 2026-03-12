@@ -1,4 +1,7 @@
 ---
+work_package_id: WP01
+title: Infrastructure Setup & Repository Port
+lane: "done"
 dependencies: []
 base_branch: main
 base_commit: 6a18657d6b8adb5fce1acd1fbf8974698403d820
@@ -9,7 +12,6 @@ name: Infrastructure Setup & Repository Port
 requirement-refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 requirement_refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 status: todo
-lane: "done"
 shell_pid: "72899"
 agent: "Gemini"
 reviewed_by: "PavelPetrovich87"
