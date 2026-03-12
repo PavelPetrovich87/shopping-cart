@@ -1,10 +1,14 @@
 ---
-work_package_id: "WP01"
-title: "Cart Item Management"
-lane: "planned"
+work_package_id: WP01
+title: Cart Item Management
+lane: "doing"
 dependencies: []
-requirement_refs: ["FR-001", "FR-002", "FR-003"]
-subtasks: ["T001", "T002", "T003", "T004", "T008"]
+base_branch: main
+base_commit: ef1aee36f9171361d54510cdaf0e967d17d17f6e
+created_at: '2026-03-12T14:19:01.990082+00:00'
+subtasks: [T001, T002, T003, T004, T008]
+requirement_refs: [FR-001, FR-002, FR-003]
+shell_pid: "74599"
 ---
 
 # WP01: Cart Item Management
