@@ -9,6 +9,7 @@ created_at: '2026-03-12T13:39:46.674840+00:00'
 subtasks: [T001, T002, T003, T004, T005]
 requirement_refs: [FR-01, FR-02, FR-03]
 shell_pid: "71674"
+agent: "gemini-cli"
 ---
 
 # Work Package: WP01 - Ports and Results Foundations
@@ -70,3 +71,7 @@ We are implementing the Pricing context's application layer. The result types fo
 
 ## Reviewer Guidance
 Check for clean imports and correct alignment of types with context boundaries.
+
+## Activity Log
+
+- 2026-03-12T13:39:47Z – gemini-cli – shell_pid=71674 – lane=doing – Assigned agent via workflow command
