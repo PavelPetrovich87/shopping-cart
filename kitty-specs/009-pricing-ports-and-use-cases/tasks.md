@@ -65,8 +65,8 @@
 **Estimated Prompt Size**: ~250 lines
 **Dependencies**: ["WP02", "WP03"]
 
-- [ ] T012: Create `src/features/pricing/infrastructure/PricingContext.ts` to wire repositories to use cases.
-- [ ] T013: Export initialized use cases from the context for use by other contexts.
+- [x] T012: Create `src/features/pricing/infrastructure/PricingContext.ts` to wire repositories to use cases.
+- [x] T013: Export initialized use cases from the context for use by other contexts.
 
 **Implementation Sketch**:
 1. Create the `infrastructure` directory in the `pricing` context.
