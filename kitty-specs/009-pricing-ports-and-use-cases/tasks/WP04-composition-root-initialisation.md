@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: Composition Root and Context Initialisation
-lane: "doing"
+lane: "done"
 dependencies: [WP02, WP03]
 base_branch: 009-pricing-ports-and-use-cases-WP04-merge-base
 base_commit: 80c7a8dd54c3b6bc401684d887b18fdaf2b65436
@@ -10,6 +10,8 @@ subtasks: [T012, T013]
 requirement_refs: [FR-01, FR-02, FR-03]
 shell_pid: "81391"
 agent: "gemini-cli"
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # Work Package: WP04 - Composition Root and Context Initialisation
@@ -55,3 +57,4 @@ Confirm that the repository instance is correctly shared across use cases within
 - 2026-03-12T14:33:47Z – gemini-cli – shell_pid=78661 – lane=doing – Assigned agent via workflow command
 - 2026-03-12T14:56:54Z – gemini-cli – shell_pid=78661 – lane=for_review – Wired Pricing context with InMemoryCouponRepository and initialized use cases.
 - 2026-03-12T14:57:01Z – gemini-cli – shell_pid=81391 – lane=doing – Started review via workflow command
+- 2026-03-12T14:57:28Z – gemini-cli – shell_pid=81391 – lane=done – Review passed: Pricing context wired correctly with seed data and in-memory repository.
