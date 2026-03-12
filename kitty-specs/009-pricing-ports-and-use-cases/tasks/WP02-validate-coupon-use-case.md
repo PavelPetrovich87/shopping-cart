@@ -1,10 +1,14 @@
 ---
-work_package_id: "WP02"
-title: "Validate Coupon Use Case"
-lane: "planned"
-dependencies: ["WP01"]
-requirement_refs: ["FR-02"]
-subtasks: ["T006", "T007", "T008"]
+work_package_id: WP02
+title: Validate Coupon Use Case
+lane: "doing"
+dependencies: [WP01]
+base_branch: 009-pricing-ports-and-use-cases-WP01
+base_commit: acf81164a3bdc1091c74699448a12625ddabbdc3
+created_at: '2026-03-12T14:19:30.828989+00:00'
+subtasks: [T006, T007, T008]
+requirement_refs: [FR-02]
+shell_pid: "74798"
 ---
 
 # Work Package: WP02 - Validate Coupon Use Case
