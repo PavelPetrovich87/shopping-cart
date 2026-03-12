@@ -1,10 +1,12 @@
 ---
 work_package_id: "WP02"
 title: "Coupon and Pricing"
-lane: "planned"
+lane: "done"
 dependencies: ["WP01"]
 requirement_refs: ["FR-004", "FR-005"]
 subtasks: ["T005", "T006", "T009"]
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # WP02: Coupon and Pricing
@@ -63,3 +65,7 @@ Enable shoppers to apply and remove promotional coupon codes with external valid
 
 ## Next Step
 `spec-kitty implement WP02 --base WP01`
+
+## Activity Log
+
+- 2026-03-12T14:35:27Z – unknown – lane=done – Review passed: Coupon application and removal use cases implemented correctly with IPricingService validation and unit tests.
