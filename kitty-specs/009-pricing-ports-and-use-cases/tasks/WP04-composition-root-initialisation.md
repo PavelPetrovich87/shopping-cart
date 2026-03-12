@@ -1,7 +1,7 @@
 ---
 work_package_id: WP04
 title: Composition Root and Context Initialisation
-lane: "doing"
+lane: "for_review"
 dependencies: [WP02, WP03]
 base_branch: 009-pricing-ports-and-use-cases-WP04-merge-base
 base_commit: 80c7a8dd54c3b6bc401684d887b18fdaf2b65436
@@ -53,3 +53,4 @@ Confirm that the repository instance is correctly shared across use cases within
 ## Activity Log
 
 - 2026-03-12T14:33:47Z – gemini-cli – shell_pid=78661 – lane=doing – Assigned agent via workflow command
+- 2026-03-12T14:56:54Z – gemini-cli – shell_pid=78661 – lane=for_review – Wired Pricing context with InMemoryCouponRepository and initialized use cases.
