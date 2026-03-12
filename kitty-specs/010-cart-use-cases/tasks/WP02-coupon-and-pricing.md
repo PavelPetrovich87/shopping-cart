@@ -1,14 +1,14 @@
 ---
 work_package_id: WP02
 title: Coupon and Pricing
-lane: "for_review"
+lane: "doing"
 dependencies: [WP01]
 base_branch: 010-cart-use-cases-WP01
 base_commit: 037f6a8bd7890f267a2da54533fbe9b12b9fba8e
 created_at: '2026-03-12T14:31:07.168211+00:00'
 subtasks: [T005, T006, T009]
 requirement_refs: [FR-004, FR-005]
-shell_pid: "77644"
+shell_pid: "78270"
 agent: "gemini-cli"
 ---
 
@@ -73,3 +73,4 @@ Enable shoppers to apply and remove promotional coupon codes with external valid
 
 - 2026-03-12T14:31:07Z – gemini-cli – shell_pid=77644 – lane=doing – Assigned agent via workflow command
 - 2026-03-12T14:32:15Z – gemini-cli – shell_pid=77644 – lane=for_review – Implemented ApplyCouponToCart and RemoveCouponFromCart use cases with validation via IPricingService.
+- 2026-03-12T14:32:21Z – gemini-cli – shell_pid=78270 – lane=doing – Started review via workflow command
