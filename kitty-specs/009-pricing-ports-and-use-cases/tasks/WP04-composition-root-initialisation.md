@@ -1,10 +1,14 @@
 ---
-work_package_id: "WP04"
-title: "Composition Root and Context Initialisation"
-lane: "planned"
-dependencies: ["WP02", "WP03"]
-requirement_refs: ["FR-01", "FR-02", "FR-03"]
-subtasks: ["T012", "T013"]
+work_package_id: WP04
+title: Composition Root and Context Initialisation
+lane: "doing"
+dependencies: [WP02, WP03]
+base_branch: 009-pricing-ports-and-use-cases-WP04-merge-base
+base_commit: 80c7a8dd54c3b6bc401684d887b18fdaf2b65436
+created_at: '2026-03-12T14:33:46.633571+00:00'
+subtasks: [T012, T013]
+requirement_refs: [FR-01, FR-02, FR-03]
+shell_pid: "78661"
 ---
 
 # Work Package: WP04 - Composition Root and Context Initialisation
