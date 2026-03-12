@@ -9,6 +9,7 @@ created_at: '2026-03-12T14:24:49.478139+00:00'
 subtasks: [T009, T010, T011]
 requirement_refs: [FR-03]
 shell_pid: "76188"
+agent: "gemini-cli"
 ---
 
 # Work Package: WP03 - Calculate Discount Use Case
@@ -63,3 +64,7 @@ The `CalculateDiscount` use case handles the arithmetic of applying a coupon to 
 ## Reviewer Guidance
 Check that calculations correctly handle integer cents to avoid floating-point issues (using the `Money` value object).
 Confirm that the capping logic is correctly implemented.
+
+## Activity Log
+
+- 2026-03-12T14:24:50Z – gemini-cli – shell_pid=76188 – lane=doing – Assigned agent via workflow command
