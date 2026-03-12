@@ -1,10 +1,14 @@
 ---
-work_package_id: "WP01"
-title: "Ports and Results Foundations"
-lane: "planned"
+work_package_id: WP01
+title: Ports and Results Foundations
+lane: "doing"
 dependencies: []
-requirement_refs: ["FR-01", "FR-02", "FR-03"]
-subtasks: ["T001", "T002", "T003", "T004", "T005"]
+base_branch: main
+base_commit: ba38b704a04ddc2f288772a30986e47db232fc0e
+created_at: '2026-03-12T13:39:46.674840+00:00'
+subtasks: [T001, T002, T003, T004, T005]
+requirement_refs: [FR-01, FR-02, FR-03]
+shell_pid: "71674"
 ---
 
 # Work Package: WP01 - Ports and Results Foundations
