@@ -1,10 +1,12 @@
 ---
 work_package_id: "WP01"
 title: "Cart Item Management"
-lane: "planned"
+lane: "done"
 dependencies: []
 requirement_refs: ["FR-001", "FR-002", "FR-003"]
 subtasks: ["T001", "T002", "T003", "T004", "T008"]
+reviewed_by: "PavelPetrovich87"
+review_status: "approved"
 ---
 
 # WP01: Cart Item Management
@@ -88,3 +90,7 @@ Create standalone functional handlers that orchestrate `Cart` domain logic and `
 
 ## Next Step
 `spec-kitty implement WP01`
+
+## Activity Log
+
+- 2026-03-12T14:35:25Z – unknown – lane=done – Review passed: Item mutation use cases (Add, Remove, ChangeQuantity) correctly implemented as standalone functional handlers with stock validation and full unit test coverage.
