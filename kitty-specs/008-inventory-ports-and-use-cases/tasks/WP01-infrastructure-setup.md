@@ -11,6 +11,7 @@ requirement_refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 status: todo
 lane: "doing"
 shell_pid: "72033"
+agent: "Gemini"
 ---
 
 ## Objective
@@ -23,3 +24,7 @@ Establish the directory structure and the driven port for the inventory reposito
 
 ## Verification
 - [ ] Check if `src/features/inventory/application/ports/IStockRepository.ts` exists and compiles
+
+## Activity Log
+
+- 2026-03-12T13:41:40Z – Gemini – shell_pid=72033 – lane=doing – Assigned agent via workflow command
