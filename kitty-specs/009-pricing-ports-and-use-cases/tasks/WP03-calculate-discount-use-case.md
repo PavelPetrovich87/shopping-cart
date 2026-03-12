@@ -1,7 +1,7 @@
 ---
 work_package_id: WP03
 title: Calculate Discount Use Case
-lane: "doing"
+lane: "for_review"
 dependencies: [WP01]
 base_branch: 009-pricing-ports-and-use-cases-WP01
 base_commit: acf81164a3bdc1091c74699448a12625ddabbdc3
@@ -68,3 +68,4 @@ Confirm that the capping logic is correctly implemented.
 ## Activity Log
 
 - 2026-03-12T14:24:50Z – gemini-cli – shell_pid=76188 – lane=doing – Assigned agent via workflow command
+- 2026-03-12T14:32:02Z – gemini-cli – shell_pid=76188 – lane=for_review – Implemented CalculateDiscount use case with unit tests and event validation.
