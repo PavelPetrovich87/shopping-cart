@@ -29,9 +29,9 @@
 **Estimated Prompt Size**: ~400 lines
 **Dependencies**: ["WP01"]
 
-- [ ] T006: Implement `ValidateCoupon` standalone function in `src/features/pricing/application/use-cases/ValidateCoupon.ts`.
-- [ ] T007: Implement unit tests for `ValidateCoupon` in `src/features/pricing/application/use-cases/__tests__/ValidateCoupon.spec.ts`.
-- [ ] T008: Verify correct domain event generation during validation via mocks/spies.
+- [x] T006: Implement `ValidateCoupon` standalone function in `src/features/pricing/application/use-cases/ValidateCoupon.ts`.
+- [x] T007: Implement unit tests for `ValidateCoupon` in `src/features/pricing/application/use-cases/__tests__/ValidateCoupon.spec.ts`.
+- [x] T008: Verify correct domain event generation during validation via mocks/spies.
 
 **Implementation Sketch**:
 1. Create a factory function `createValidateCoupon` that takes `ICouponRepository` as a dependency.
