@@ -284,14 +284,15 @@
 | **Complexity** | 🔴 Large |
 | **Depends On** | T-006, T-008, T-011, T-013, T-014 |
 
-**Description**: Wire the end-to-end checkout flow. "Checkout" button triggers `InitiateCheckoutUseCase` which validates all items' stock, emits `CheckoutInitiated`, and Inventory subscribes to reserve stock. If stock has changed since cart was loaded, show modal with updated quantities and let user confirm. Includes stock reservation with timeout (stretch).
+**Description**: Wire the end-to-end checkout flow. "Checkout" button triggers `InitiateCheckoutUseCase` which validates all items' stock, emits `CheckoutInitiated`, and Inventory subscribes to reserve stock. If stock has changed since cart was loaded, show modal with updated quantities and let user confirm. Includes stock reservation with timeout (stretch). The flow must handle failures by emitting `CheckoutFailed`, and a timer mechanism must emit `ReservationTimeoutEvent` for abandoned sessions.
 
 **Acceptance Criteria**:
 - [ ] Clicking "Checkout" validates all cart items' stock availability
 - [ ] If stock changed → modal shown with updated info, cart updated on "Ok"
 - [ ] `CheckoutInitiated` event triggers `ReserveStock` in Inventory context (via EventBus)
 - [ ] Reserved stock reduces available count for other users
-- [ ] Reservation timeout releases stock (stretch: timer-driven `ReleaseStockReservation`)
+- [ ] Failed checkout or cancelled payment emits `CheckoutFailed` event
+- [ ] Reservation timeout is tracked and emits `ReservationTimeoutEvent`
 - [ ] Cart transitions to `Checked_Out` state on success
 - [ ] Integration test covering the full event chain
 

@@ -50,6 +50,7 @@ This constitution captures the technical standards, code quality expectations, t
 5. **IMPLEMENT COMMAND**: Only after specifications are finalized AND the user gives a direct command to implement, can the AI write the code.
 6. **ASK QUESTIONS**: The AI should proactively ask questions to clarify intent rather than making assumptions.
 7. **MANDATORY REVIEW**: Upon completing the implementation of a work package, the AI must move the task to the `for_review` lane and **STOP**. It must not move a task to the `done` lane or proceed to the next task until the user has reviewed the changes and provided explicit approval.
+8. **REVIEWABLE ARTIFACTS**: When requested to provide or create an artifact for review (e.g., a specification or plan), the AI must create a reviewable version in the project-specific brain/artifacts directory to facilitate user comments and structured feedback within the IDE.
 
 ### Domain-Driven Design Context Loading
 1. **READ BEFORE PLANNING:** When using `/spec-kitty.specify` or `/spec-kitty.plan` to scaffold a feature, you MUST identify the relevant Bounded Context.

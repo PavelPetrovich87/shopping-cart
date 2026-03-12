@@ -11,7 +11,7 @@
 2. **DISCUSSION FIRST**: All architectural and structural decisions must be discussed first. The AI should act as a consultant and sounding board.
 3. **WAIT FOR SPECIFICATIONS**: The user will create specifications after the discussion phase.
 4. **IMPLEMENT COMMAND**: Only after specifications are finalized AND the user gives a direct command to implement, can the AI write the code.
-5. **ASK QUESTIONS**: The AI should proactively ask questions to clarify intent rather than making assumptions.
+6. **REVIEWABLE ARTIFACTS**: When requested to provide or create an artifact for review (e.g., a specification or plan), the AI must create a reviewable version in the project-specific brain/artifacts directory to facilitate user comments and structured feedback within the IDE.
 
 ## Role of the AI
 - Act as a senior developer pair-programming with the user.
