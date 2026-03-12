@@ -26,11 +26,11 @@
 - **Requirements**: FR-001, FR-002, FR-003
 - **Test Criteria**: All item use cases pass unit tests with 100% coverage, including stock check failures.
 - **Included Subtasks**:
-  - [ ] T001: Add missing domain events
-  - [ ] T002: Implement `AddItemToCart` use case
-  - [ ] T003: Implement `RemoveItemFromCart` use case
-  - [ ] T004: Implement `ChangeCartItemQuantity` use case
-  - [ ] T008: Create unit tests for Item use cases
+  - [x] T001: Add missing domain events
+  - [x] T002: Implement `AddItemToCart` use case
+  - [x] T003: Implement `RemoveItemFromCart` use case
+  - [x] T004: Implement `ChangeCartItemQuantity` use case
+  - [x] T008: Create unit tests for Item use cases
 - **Implementation Sketch**:
   1. Update `CartEvents.ts` with new interfaces.
   2. Implement functional handlers in `src/features/cart/application/use-cases/`.
@@ -45,9 +45,9 @@
 - **Requirements**: FR-004, FR-005
 - **Test Criteria**: Coupons are validated via `IPricingService` and applied/removed correctly.
 - **Included Subtasks**:
-  - [ ] T005: Implement `ApplyCouponToCart` use case
-  - [ ] T006: Implement `RemoveCouponFromCart` use case
-  - [ ] T009: Create unit tests for Coupon use cases
+  - [x] T005: Implement `ApplyCouponToCart` use case
+  - [x] T006: Implement `RemoveCouponFromCart` use case
+  - [x] T009: Create unit tests for Coupon use cases
 - **Implementation Sketch**:
   1. Implement `ApplyCouponToCart` calling `pricingService.validateCoupon`.
   2. Implement `RemoveCouponFromCart`.
