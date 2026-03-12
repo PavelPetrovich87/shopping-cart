@@ -14,10 +14,10 @@
 - [x] Dependencies: [WP01]
 
 ### WP03: Reservation Management (Release & Depletion)
-- [ ] Implement `ReleaseStockReservation` use case
-- [ ] Implement `ConfirmStockDepletion` use case
-- [ ] Add unit tests for management use cases
-- [ ] Dependencies: [WP02]
+- [x] Implement `ReleaseStockReservation` use case
+- [x] Implement `ConfirmStockDepletion` use case
+- [x] Add unit tests for management use cases
+- [x] Dependencies: [WP02]
 
 ## Phase 3: Integration (FUTURE)
 - [ ] Implement `ZustandInventoryRepository` (T-012)
