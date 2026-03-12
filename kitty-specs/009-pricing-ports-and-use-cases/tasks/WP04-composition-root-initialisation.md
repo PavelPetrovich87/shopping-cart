@@ -1,0 +1,46 @@
+---
+work_package_id: "WP04"
+title: "Composition Root and Context Initialisation"
+lane: "planned"
+dependencies: ["WP02", "WP03"]
+requirement_refs: ["FR-01", "FR-02", "FR-03"]
+subtasks: ["T012", "T013"]
+---
+
+# Work Package: WP04 - Composition Root and Context Initialisation
+
+## Objective
+Establish the composition root for the Pricing context following the project's Pure DI principles.
+
+## Context
+This work package wires the application logic (use cases) to the infrastructure (repositories). This creates a single point of initialization that can be accessed by other bounded contexts (like Cart).
+
+## Technical Guidance
+
+### Subtask T012: Create PricingContext.ts
+**Purpose**: Centralize dependency injection for the Pricing context.
+**Steps**:
+1. Create directory `src/features/pricing/infrastructure/`.
+2. Create `src/features/pricing/infrastructure/PricingContext.ts`.
+3. Define a function or class to hold the initialized state.
+4. Instantiate the repository (currently mocked as an in-memory instance).
+5. Pass the repository to `createValidateCoupon` and `createCalculateDiscount`.
+**Validation**:
+- [ ] Initialized use cases correctly receive the same repository instance.
+
+### Subtask T013: Export initialized context
+**Purpose**: Provide an entry point for other contexts to interact with Pricing.
+**Steps**:
+1. Export the initialized use case functions from the Pricing context.
+2. Consider implementing a pattern where a single `pricingContext` object is exported containing all use cases.
+**Validation**:
+- [ ] Successfully provides use cases to external callers.
+
+## Definition of Done
+- Pricing context is wired and ready for integration.
+- Use cases are instantiated with correct dependencies.
+- No heavy DI frameworks used, only pure TypeScript.
+
+## Reviewer Guidance
+Check for clear boundaries and minimal exposure of infrastructure details.
+Confirm that the repository instance is correctly shared across use cases within the context.
