@@ -8,10 +8,10 @@
 - [x] Define Use Case interfaces in `contracts/` (Done in Planning)
 
 ### WP02: Core Use Cases (Availability & Reservation)
-- [ ] Implement `CheckStockAvailability` use case
-- [ ] Implement `ReserveStock` use case
-- [ ] Add unit tests for core use cases
-- [ ] Dependencies: [WP01]
+- [x] Implement `CheckStockAvailability` use case
+- [x] Implement `ReserveStock` use case
+- [x] Add unit tests for core use cases
+- [x] Dependencies: [WP01]
 
 ### WP03: Reservation Management (Release & Depletion)
 - [ ] Implement `ReleaseStockReservation` use case

@@ -9,7 +9,7 @@ name: Core Use Cases (Availability & Reservation)
 requirement-refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 requirement_refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 status: todo
-lane: "doing"
+lane: "for_review"
 shell_pid: "73058"
 agent: "Gemini"
 ---
@@ -18,14 +18,15 @@ agent: "Gemini"
 Implement the core use cases for checking stock availability and reserving stock.
 
 ## Tasks
-- [ ] Implement `CheckStockAvailability` use case in `src/features/inventory/application/use-cases/CheckStockAvailability.ts`
-- [ ] Implement `ReserveStock` use case in `src/features/inventory/application/use-cases/ReserveStock.ts`
-- [ ] Implement `IEventBus` usage in `ReserveStock` for publishing `StockReserved` events
+- [x] Implement `CheckStockAvailability` use case in `src/features/inventory/application/use-cases/CheckStockAvailability.ts`
+- [x] Implement `ReserveStock` use case in `src/features/inventory/application/use-cases/ReserveStock.ts`
+- [x] Implement `IEventBus` usage in `ReserveStock` for publishing `StockReserved` events
 
 ## Verification
-- [ ] Unit tests for `CheckStockAvailability` pass
-- [ ] Unit tests for `ReserveStock` pass (including event publishing verification)
+- [x] Unit tests for `CheckStockAvailability` pass
+- [x] Unit tests for `ReserveStock` pass (including event publishing verification)
 
 ## Activity Log
 
 - 2026-03-12T14:03:41Z – Gemini – shell_pid=73058 – lane=doing – Assigned agent via workflow command
+- 2026-03-12T14:05:44Z – Gemini – shell_pid=73058 – lane=for_review – Core use cases (CheckStockAvailability, ReserveStock) implemented with unit tests in .worktrees/008-inventory-ports-and-use-cases-WP02
