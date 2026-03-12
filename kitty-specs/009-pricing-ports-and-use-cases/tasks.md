@@ -8,11 +8,11 @@
 **Success Criteria**: Result types and port interfaces are defined and correctly imported by other contexts.
 **Estimated Prompt Size**: ~350 lines
 
-- [ ] T001: Move `PricingResults.ts` from `src/features/cart/domain/` to `src/features/pricing/domain/` and update all references. [P]
-- [ ] T002: Create Inbound Port `IValidateCoupon.ts` in `src/features/pricing/application/ports/IValidateCoupon.ts` based on the design contract. [P]
-- [ ] T003: Create Inbound Port `ICalculateDiscount.ts` in `src/features/pricing/application/ports/ICalculateDiscount.ts` based on the design contract. [P]
-- [ ] T004: Update driven port `src/features/cart/application/ports/IPricingService.ts` to use the new `PricingResults` from the `pricing` domain. [P]
-- [ ] T005: Create a barrel file for ports in `src/features/pricing/application/ports/index.ts`. [P]
+- [x] T001: Move `PricingResults.ts` from `src/features/cart/domain/` to `src/features/pricing/domain/` and update all references. [P]
+- [x] T002: Create Inbound Port `IValidateCoupon.ts` in `src/features/pricing/application/ports/IValidateCoupon.ts` based on the design contract. [P]
+- [x] T003: Create Inbound Port `ICalculateDiscount.ts` in `src/features/pricing/application/ports/ICalculateDiscount.ts` based on the design contract. [P]
+- [x] T004: Update driven port `src/features/cart/application/ports/IPricingService.ts` to use the new `PricingResults` from the `pricing` domain. [P]
+- [x] T005: Create a barrel file for ports in `src/features/pricing/application/ports/index.ts`. [P]
 
 **Implementation Sketch**:
 1. Copy `src/features/cart/domain/PricingResults.ts` to `src/features/pricing/domain/PricingResults.ts`.
