@@ -1,5 +1,5 @@
 import { Money } from '@/shared/domain/Money';
-import { CouponResult, MoneyResult } from '@/features/cart/domain/PricingResults';
+import { CouponResult, MoneyResult } from '@/features/pricing/domain/PricingResults';
 
 /**
  * Driven port interface for communicating with the Pricing domain context.
