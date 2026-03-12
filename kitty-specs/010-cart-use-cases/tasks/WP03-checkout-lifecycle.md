@@ -9,6 +9,7 @@ created_at: '2026-03-12T14:35:33.930171+00:00'
 subtasks: [T007, T010]
 requirement_refs: [FR-006]
 shell_pid: "79287"
+agent: "gemini-cli"
 ---
 
 # WP03: Checkout Lifecycle
@@ -60,3 +61,7 @@ Ensure the cart transitions to `Checkout_Pending` only if every item in the cart
 
 ## Next Step
 `spec-kitty implement WP03 --base WP01`
+
+## Activity Log
+
+- 2026-03-12T14:35:34Z – gemini-cli – shell_pid=79287 – lane=doing – Assigned agent via workflow command
