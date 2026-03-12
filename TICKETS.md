@@ -82,7 +82,7 @@
 
 ---
 
-### T-007: `ProductVariant` Aggregate Root
+### T-007: `ProductVariant` Aggregate Root ✅
 | Field | Value |
 |---|---|
 | **Context** | 📦 Inventory |
@@ -92,16 +92,16 @@
 **Description**: Implement `ProductVariant.ts` and `StockReservation.ts` (Value Object). `ProductVariant` holds `totalOnHand`, `sold`, pricing info, and a collection of `StockReservation`s. Available stock = `totalOnHand - sumReserved`. Enforce `totalOnHand ≥ 0`.
 
 **Acceptance Criteria**:
-- [ ] `variant.availableStock` computes correctly
-- [ ] `variant.reserve(orderId, qty)` creates a `StockReservation`
-- [ ] `variant.releaseReservation(orderId)` removes it
-- [ ] `variant.confirmDepletion(orderId)` reduces `totalOnHand` and removes reservation
-- [ ] Domain events: `StockReserved`, `StockDepleted`
-- [ ] Unit tests for stock math and reservation lifecycle
+- [x] `variant.availableStock` computes correctly
+- [x] `variant.reserve(orderId, qty)` creates a `StockReservation`
+- [x] `variant.releaseReservation(orderId)` removes it
+- [x] `variant.confirmDepletion(orderId)` reduces `totalOnHand` and removes reservation
+- [x] Domain events: `StockReserved`, `StockDepleted`
+- [x] Unit tests for stock math and reservation lifecycle
 
 ---
 
-### T-009: `Coupon` Aggregate Root
+### T-009: `Coupon` Aggregate Root ✅
 | Field | Value |
 |---|---|
 | **Context** | 🎟️ Pricing |
@@ -111,19 +111,19 @@
 **Description**: Implement `Coupon.ts` aggregate. Coupons have a `code`, optional `discount_amount` (flat `Money`), and optional `discount_percentage`. Supports two discount modes: flat amount or percentage. Calculating discount against a subtotal must never result in negative totals.
 
 **Acceptance Criteria**:
-- [ ] `coupon.calculateDiscount(subtotal: Money): Money` works for flat and percentage modes
-- [ ] Percentage mode: `$100 subtotal × 10% → $10 discount`
-- [ ] Flat mode: `$5 off`
-- [ ] 100% discount caps at subtotal (total ≥ $0.00)
-- [ ] Domain events: `CouponValidated`, `CouponValidationFailed`, `DiscountCalculated`
-- [ ] Unit tests for both modes + edge cases
+- [x] `coupon.calculateDiscount(subtotal: Money): Money` works for flat and percentage modes
+- [x] Percentage mode: `$100 subtotal × 10% → $10 discount`
+- [x] Flat mode: `$5 off`
+- [x] 100% discount caps at subtotal (total ≥ $0.00)
+- [x] Domain events: `CouponValidated`, `CouponValidationFailed`, `DiscountCalculated`
+- [x] Unit tests for both modes + edge cases
 
 ---
 
 ## Tier 3 — Ports & Basic Use Cases
 *Interfaces and early orchestration depending on entities from Tier 2.*
 
-### T-005: Cart Ports (Interfaces)
+### T-005: Cart Ports (Interfaces) ✅
 | Field | Value |
 |---|---|
 | **Context** | 🛍️ Cart |
@@ -133,10 +133,10 @@
 **Description**: Define port interfaces in `src/features/cart/application/ports/`: `ICartRepository`, `IInventoryService`, `IPricingService`. These are the contracts that driven adapters must fulfill.
 
 **Acceptance Criteria**:
-- [ ] `ICartRepository`: `getCart()`, `saveCart(cart)` method signatures
-- [ ] `IInventoryService`: `checkStockAvailability(skuId, quantity): Promise<StockResult>`
-- [ ] `IPricingService`: `validateCoupon(code): Promise<CouponResult>`, `calculateDiscount(code, subtotal): Promise<Money>`
-- [ ] All return types are domain types (no infrastructure leaks)
+- [x] `ICartRepository`: `getCart()`, `saveCart(cart)` method signatures
+- [x] `IInventoryService`: `checkStockAvailability(skuId, quantity): Promise<StockResult>`
+- [x] `IPricingService`: `validateCoupon(code): Promise<CouponResult>`, `calculateDiscount(code, subtotal): Promise<Money>`
+- [x] All return types are domain types (no infrastructure leaks)
 
 ---
 
