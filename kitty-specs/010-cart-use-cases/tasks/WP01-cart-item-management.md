@@ -9,6 +9,7 @@ created_at: '2026-03-12T14:19:01.990082+00:00'
 subtasks: [T001, T002, T003, T004, T008]
 requirement_refs: [FR-001, FR-002, FR-003]
 shell_pid: "74599"
+agent: "gemini-cli"
 ---
 
 # WP01: Cart Item Management
@@ -92,3 +93,7 @@ Create standalone functional handlers that orchestrate `Cart` domain logic and `
 
 ## Next Step
 `spec-kitty implement WP01`
+
+## Activity Log
+
+- 2026-03-12T14:19:02Z – gemini-cli – shell_pid=74599 – lane=doing – Assigned agent via workflow command
