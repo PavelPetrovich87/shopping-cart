@@ -1,7 +1,7 @@
 ---
 work_package_id: WP02
 title: Validate Coupon Use Case
-lane: "doing"
+lane: "for_review"
 dependencies: [WP01]
 base_branch: 009-pricing-ports-and-use-cases-WP01
 base_commit: acf81164a3bdc1091c74699448a12625ddabbdc3
@@ -71,3 +71,4 @@ Check that the error messages match the feature specification exactly.
 ## Activity Log
 
 - 2026-03-12T14:19:31Z – gemini-cli – shell_pid=74798 – lane=doing – Assigned agent via workflow command
+- 2026-03-12T14:22:56Z – gemini-cli – shell_pid=74798 – lane=for_review – Implemented ValidateCoupon use case with full unit test coverage and domain event validation.
