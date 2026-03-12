@@ -1,7 +1,7 @@
 ---
 work_package_id: "WP03"
 title: "Calculate Discount Use Case"
-lane: "planned"
+lane: "done"
 dependencies: ["WP01"]
 requirement_refs: ["FR-03"]
 subtasks: ["T009", "T010", "T011"]
