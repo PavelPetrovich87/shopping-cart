@@ -1,14 +1,14 @@
 ---
 work_package_id: WP01
 title: Ports and Results Foundations
-lane: "for_review"
+lane: "doing"
 dependencies: []
 base_branch: main
 base_commit: ba38b704a04ddc2f288772a30986e47db232fc0e
 created_at: '2026-03-12T13:39:46.674840+00:00'
 subtasks: [T001, T002, T003, T004, T005]
 requirement_refs: [FR-01, FR-02, FR-03]
-shell_pid: "71674"
+shell_pid: "72848"
 agent: "gemini-cli"
 ---
 
@@ -76,3 +76,4 @@ Check for clean imports and correct alignment of types with context boundaries.
 
 - 2026-03-12T13:39:47Z – gemini-cli – shell_pid=71674 – lane=doing – Assigned agent via workflow command
 - 2026-03-12T13:40:40Z – gemini-cli – shell_pid=71674 – lane=for_review – Ready for review: Pricing results moved and inbound ports defined.
+- 2026-03-12T14:02:18Z – gemini-cli – shell_pid=72848 – lane=doing – Started review via workflow command
