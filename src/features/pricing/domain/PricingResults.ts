@@ -3,8 +3,9 @@ import { Money } from '@/shared/domain/Money';
 
 /**
  * Domain-specific result for coupon validation.
+ * Using string for error message per spec's strict string requirements.
  */
-export type CouponError = 'INVALID_CODE' | 'EXPIRED' | 'COUPON_NOT_FOUND' | 'MIN_SUBTOTAL_NOT_MET';
+export type CouponError = string;
 
 export type CouponSuccess = {
   code: string;
@@ -16,7 +17,8 @@ export type CouponResult = Result<CouponSuccess, CouponError>;
 
 /**
  * Domain-specific result for discount calculations.
+ * Using string for error message per spec's strict string requirements.
  */
-export type MoneyError = 'NEGATIVE_TOTAL' | 'CALCULATION_FAILURE';
+export type MoneyError = string;
 
 export type MoneyResult = Result<Money, MoneyError>;
