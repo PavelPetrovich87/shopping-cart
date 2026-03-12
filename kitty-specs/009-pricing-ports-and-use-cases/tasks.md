@@ -47,9 +47,9 @@
 **Estimated Prompt Size**: ~400 lines
 **Dependencies**: ["WP01"]
 
-- [ ] T009: Implement `CalculateDiscount` standalone function in `src/features/pricing/application/use-cases/CalculateDiscount.ts`.
-- [ ] T010: Implement unit tests for `CalculateDiscount` in `src/features/pricing/application/use-cases/__tests__/CalculateDiscount.spec.ts`.
-- [ ] T011: Verify correct discount calculation and domain event emission for both FLAT and PERCENTAGE types.
+- [x] T009: Implement `CalculateDiscount` standalone function in `src/features/pricing/application/use-cases/CalculateDiscount.ts`.
+- [x] T010: Implement unit tests for `CalculateDiscount` in `src/features/pricing/application/use-cases/__tests__/CalculateDiscount.spec.ts`.
+- [x] T011: Verify correct discount calculation and domain event emission for both FLAT and PERCENTAGE types.
 
 **Implementation Sketch**:
 1. Create a factory function `createCalculateDiscount` that takes `ICouponRepository` as a dependency.
