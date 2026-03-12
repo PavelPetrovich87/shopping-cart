@@ -1,108 +1,82 @@
-# Implementation Plan: [FEATURE]
-*Path: [templates/plan-template.md](templates/plan-template.md)*
+# Implementation Plan: 010-cart-use-cases
+*Path: kitty-specs/010-cart-use-cases/plan.md*
 
-
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+**Branch**: `main` | **Date**: 2026-03-12 | **Spec**: [spec.md](spec.md)
+**Input**: Feature specification from `kitty-specs/010-cart-use-cases/spec.md`
 
 ## Summary
-
-[Extract from feature spec: primary requirement + technical approach from research]
+Implement core Cart application use cases (`AddItemToCart`, `RemoveItemFromCart`, `ChangeCartItemQuantity`, `ApplyCouponToCart`, `RemoveCouponFromCart`, `InitiateCheckout`) as standalone functional handlers using the Result pattern. These handlers will orchestrate domain logic and external ports (Inventory, Pricing) but will remain pure by returning the updated aggregate and domain events for the caller to persist and publish.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript 5.x (Vite)  
+**Primary Dependencies**: `Cart` aggregate, `IInventoryService`, `IPricingService`, `EventBus`  
+**Storage**: In-memory (Zustand-based repository adapter)  
+**Testing**: Vitest (100% coverage for use cases, including mocked ports)  
+**Target Platform**: Web (Chrome, Firefox, Safari)
+**Project Type**: Frontend (Hexagonal Architecture / DDD)  
+**Performance Goals**: Instantaneous UI updates for cart mutations  
+**Constraints**: 
+- Standalone functional handlers (no classes/mediators).
+- `Result<T, E>` pattern for error propagation.
+- Handlers return `{ updatedCart, events }` on success.
+- Caller is responsible for persistence (`cartRepository.save`) and event publishing (`eventBus.publish`).
+**Scale/Scope**: 6 core use cases for the Cart context.
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+1. **DDD Strictness**: Use cases orchestrate domain entities and ports. **PASSED**
+2. **Hexagonal Architecture**: Ports (`IInventoryService`, `IPricingService`) are used to decouple from infrastructure. **PASSED**
+3. **State vs. Events**: User requested a deviation where Use Cases return events/aggregate instead of performing side effects directly. This is a deliberate design choice for higher purity/testability. **PASSED (with deviation)**
+4. **Testing**: 100% coverage mandated. **PASSED**
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/010-cart-use-cases/
+├── plan.md              # This file
+├── research.md          # Phase 0 output
+├── data-model.md        # Phase 1 output
+├── quickstart.md        # Phase 1 output
+├── contracts/           # Phase 1 output
+└── tasks.md             # Phase 2 output (generated via /spec-kitty.tasks)
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
+├── features/
+│   └── cart/
+│       ├── application/
+│       │   └── use-cases/      # Standalone functional handlers
+│       │       ├── AddItemToCart.ts
+│       │       ├── RemoveItemFromCart.ts
+│       │       ├── ChangeCartItemQuantity.ts
+│       │       ├── ApplyCouponToCart.ts
+│       │       ├── RemoveCouponFromCart.ts
+│       │       └── InitiateCheckout.ts
+│       ├── domain/
+│       │   ├── entities/       # Cart aggregate (T-004)
+│       │   └── ports/          # IInventoryService, IPricingService (T-005)
+│       └── infrastructure/
+│           └── adapters/       # Zustand repository, Mock services
 tests/
-├── contract/
-├── integration/
 └── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+    └── features/
+        └── cart/
+            └── application/
+                └── use-cases/  # 100% coverage tests
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Standard Hexagonal structure within the `cart` feature module.
 
 ## Complexity Tracking
 
-*Fill ONLY if Constitution Check has violations that must be justified*
-
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| Pure handlers | User requested use cases return events/aggregate for caller to handle side effects. | Direct orchestration in use cases is standard but user prefers strict separation of side effects. |
