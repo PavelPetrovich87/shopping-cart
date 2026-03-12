@@ -3,9 +3,9 @@
 ## Phase 2: Implementation Breakdown
 
 ### WP01: Infrastructure Setup & Repository Port
-- [ ] Create application layer directory structure
-- [ ] Define `IStockRepository` port in `src/features/inventory/application/ports/`
-- [ ] Define Use Case interfaces in `contracts/` (Done in Planning)
+- [x] Create application layer directory structure
+- [x] Define `IStockRepository` port in `src/features/inventory/application/ports/`
+- [x] Define Use Case interfaces in `contracts/` (Done in Planning)
 
 ### WP02: Core Use Cases (Availability & Reservation)
 - [ ] Implement `CheckStockAvailability` use case
