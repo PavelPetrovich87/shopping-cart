@@ -1,10 +1,14 @@
 ---
-work_package_id: "WP02"
-title: "Coupon and Pricing"
-lane: "planned"
-dependencies: ["WP01"]
-requirement_refs: ["FR-004", "FR-005"]
-subtasks: ["T005", "T006", "T009"]
+work_package_id: WP02
+title: Coupon and Pricing
+lane: "doing"
+dependencies: [WP01]
+base_branch: 010-cart-use-cases-WP01
+base_commit: 037f6a8bd7890f267a2da54533fbe9b12b9fba8e
+created_at: '2026-03-12T14:31:07.168211+00:00'
+subtasks: [T005, T006, T009]
+requirement_refs: [FR-004, FR-005]
+shell_pid: "77644"
 ---
 
 # WP02: Coupon and Pricing
