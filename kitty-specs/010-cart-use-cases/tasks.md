@@ -45,9 +45,9 @@
 - **Requirements**: FR-004, FR-005
 - **Test Criteria**: Coupons are validated via `IPricingService` and applied/removed correctly.
 - **Included Subtasks**:
-  - [ ] T005: Implement `ApplyCouponToCart` use case
-  - [ ] T006: Implement `RemoveCouponFromCart` use case
-  - [ ] T009: Create unit tests for Coupon use cases
+  - [x] T005: Implement `ApplyCouponToCart` use case
+  - [x] T006: Implement `RemoveCouponFromCart` use case
+  - [x] T009: Create unit tests for Coupon use cases
 - **Implementation Sketch**:
   1. Implement `ApplyCouponToCart` calling `pricingService.validateCoupon`.
   2. Implement `RemoveCouponFromCart`.
