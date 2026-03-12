@@ -11,6 +11,7 @@ requirement_refs: [FR-001, FR-002, FR-003, FR-004, FR-005]
 status: todo
 lane: "doing"
 shell_pid: "73058"
+agent: "Gemini"
 ---
 
 ## Objective
@@ -24,3 +25,7 @@ Implement the core use cases for checking stock availability and reserving stock
 ## Verification
 - [ ] Unit tests for `CheckStockAvailability` pass
 - [ ] Unit tests for `ReserveStock` pass (including event publishing verification)
+
+## Activity Log
+
+- 2026-03-12T14:03:41Z – Gemini – shell_pid=73058 – lane=doing – Assigned agent via workflow command
