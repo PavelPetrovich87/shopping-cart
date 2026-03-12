@@ -35,3 +35,30 @@ export interface CartCleared extends DomainEvent {
         cartId: string;
     };
 }
+
+export interface CouponAppliedToCart extends DomainEvent {
+    eventName: 'CouponAppliedToCart';
+    payload: {
+        cartId: string;
+        code: string;
+        discountAmount?: Money;
+        discountPercentage?: number;
+    };
+}
+
+export interface CouponRemovedFromCart extends DomainEvent {
+    eventName: 'CouponRemovedFromCart';
+    payload: {
+        cartId: string;
+        code: string;
+    };
+}
+
+export interface CheckoutInitiated extends DomainEvent {
+    eventName: 'CheckoutInitiated';
+    payload: {
+        cartId: string;
+        items: { skuId: string; quantity: number }[];
+        subtotal: Money;
+    };
+}
